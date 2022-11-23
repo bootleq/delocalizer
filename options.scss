@@ -1,0 +1,150 @@
+:root {
+  --font-code: 'Cascadia Code', 'Roboto Mono', 'DejaVu Sans Mono', Monaco, Consolas, monospace;
+}
+
+body {
+  user-select: text;
+  cursor: auto;
+  overflow-y: hidden; // the height will be auto adjusted by browser, hide scroll to avoid flashing when adding list item
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+fieldset {
+  font-size: 1.4rem;
+  line-height: 1.5;
+
+  &:not(last-child) {
+    margin-bottom: 1.5em;
+  }
+
+  input.add {
+    float: right;
+  }
+
+  &:disabled {
+    opacity: 0.7;
+
+    button {
+      cursor: not-allowed;
+    }
+  }
+}
+
+label {
+  display: block;
+
+  input[type='radio'] {
+    width: 1.5em;
+  }
+}
+
+button,
+input[type='button'] {
+  &:enabled {
+    cursor: pointer;
+  }
+}
+
+ul {
+  margin: 0;
+  padding-left: calc(1.5em + 2px);
+  list-style: none;
+}
+
+li {
+  display: flex;
+  padding: 2px;
+  margin: 2px 0;
+
+  input[type='text'] {
+    flex-grow: 1;
+    margin-right: 4px;
+    font-family: var(--font-code);
+
+    &:disabled {
+      background-color: #ebebe4;
+      border-style: dotted;
+    }
+  }
+
+  &:hover {
+    background-color: #ededed;
+    outline: 2px solid #efefef;
+  }
+
+  &:first-child {
+    input[type='button'] {
+      visibility: hidden;
+    }
+  }
+}
+
+.hint-and-add {
+  display: flex;
+  padding: 2px;
+  padding-left: calc(1.5em + 4px);
+  margin: 2px 0;
+  align-items: center;
+}
+
+small.hint {
+  flex-grow: 1;
+  margin-right: 4px;
+  opacity: 0.6;
+}
+
+.validating {
+  input:invalid {
+    background-color: #fdf2f5;
+    outline: 1px solid red;
+    color: red;
+  }
+}
+
+code {
+  font-family: var(--font-code);
+
+  &:hover {
+    background-color: gold;
+  }
+}
+
+#actions {
+  font-size: 1.3rem;
+  text-align: right;
+  margin: 0;
+  padding-bottom: 0;
+  border: none;
+
+  .status-msg {
+    &.success {
+      color: green;
+    }
+    &.error {
+      color: red;
+    }
+    span {
+      cursor: pointer;
+      color: #444;
+      display: inline-block;
+      padding: 0 2px;
+      margin: 0 8px 0 2px;
+    }
+  }
+
+  button {
+    margin-left: 1em;
+    font-size: 1.2rem;
+  }
+}
+
+#details {
+  input[type='text'] {
+    padding: 2px 5px;
+    margin-left: 4px;
+    font-family: var(--font-code);
+  }
+}

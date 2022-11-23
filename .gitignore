@@ -1,0 +1,9 @@
+*.zsh
+*.lnk
+Thumbs.db
+Desktop.ini
+build
+dist
+node_modules
+stats.json
+.tool-versions

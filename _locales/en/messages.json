@@ -1,0 +1,111 @@
+{
+  "extDescription": {
+    "message": "Read untranslated document, go away from localized URL."
+  },
+
+  "error_unsupportedURL": {
+    "message": "Unsupported URL",
+    "description": "Action popup error message, when trigger action on pages like chrome:// URLs"
+  },
+  "error_URLMismatchLocale": {
+    "message": "URL and target Locale setting mismatch",
+    "description": "Action popup error message, action triggered, but current URL not meet locale setting"
+  },
+  "error_unknownActionType": {
+    "message": "Unknown action type",
+    "description": "Mostly internal error, unexpected message received"
+  },
+  "error_otherError": {
+    "message": "Error: ",
+    "description": "General exception, error message will also be shown after it"
+  },
+  "error_invalidHostPattern": {
+    "message": "Invalid reglur expression",
+    "description": "Form validation error in options page, host pattern invalid"
+  },
+  "flash_executed": {
+    "message": "Executed",
+    "description": "Action popup's success message, not likely to be seen because the popup closed when success"
+  },
+
+  "options_saved": {
+    "message": "Successfully saved"
+  },
+  "options_invalid": {
+    "message": "Invalid input",
+    "description": "Options page form invalid"
+  },
+  "options_saveReminder": {
+    "message": "Remember to save changes",
+    "description": "In options page, reminder user to click save button"
+  },
+  "options_save": {
+    "message": "Save"
+  },
+  "options_headerTriggerWhen": {
+    "message": "Do auto transform if",
+    "description": "Options page section header, when should we do auto translation"
+  },
+  "options_headerDetails": {
+    "message": "Detail settings",
+    "description": "Options page section header, for detail items"
+  },
+  "options_headerReplacement": {
+    "message": "Replacement request header"
+  },
+  "options_acceptLanguageHeader": {
+    "message": "Accept-Language"
+  },
+  "options_defaultValueIs": {
+    "message": "Default value: "
+  },
+  "options_delete": {
+    "message": "Delete"
+  },
+  "options_listBelow": {
+    "message": "One of: "
+  },
+  "options_addNew": {
+    "message": "Add"
+  },
+  "options_targetHost": {
+    "message": "Destination URLs"
+  },
+  "options_targetHostAny": {
+    "message": "Any URLs"
+  },
+  "options_targetHostHint": {
+    "message": "Skip <code>https://</code> part, example: <code>reactjs.org/docs</code>;<br /> Prefix with <code>/</code> to use regular expression, e.g., <code>/^(docs|msdn)\\.microsoft</code>"
+  },
+  "options_targetReferrer": {
+    "message": "Websites before click the link (Referrer)"
+  },
+  "options_targetReferrerAny": {
+    "message": "Any sites"
+  },
+  "options_targetReferrerHint": {
+    "message": "Input <code>hostname</code>, e.g., <code>www.google.com</code>"
+  },
+  "options_targetLocales": {
+    "message": "Destination URL's locale segment"
+  },
+  "options_targetLocalesAnyHTML": {
+    "message": "Any looks alike (e.g., <code>en</code> or <code>en-US</code>)"
+  },
+  "options_targetLocalesHint": {
+    "message": "Can omit <code>-XX</code> part within <code>xx-XX</code>, example: set <code>zh</code> can also include <code>zh-TW</code> and <code>zh_TW</code>"
+  },
+
+  "popup_enableAutoTrigger": {
+    "message": "Continue auto transform"
+  },
+  "popup_disableAutoTrigger": {
+    "message": "Suspend auto transform"
+  },
+  "popup_triggerOnPage": {
+    "message": "Transform current page"
+  },
+  "popup_openOptionsPage": {
+    "message": "Options"
+  }
+}

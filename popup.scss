@@ -1,0 +1,91 @@
+body {
+  user-select: text;
+  cursor: auto;
+  overflow-y: hidden; // the height will be auto adjusted by browser, hide scroll to avoid flashing when adding list item
+  padding: 4px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+li {
+  padding: 8px 1.3em;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #dfdfe5;
+  }
+}
+
+.flash-box {
+  padding: 0;
+  margin: 0;
+
+  &:not(:empty) {
+    margin-bottom: 8px;
+  }
+}
+
+.flash {
+  text-align: center;
+  padding: 1em 10px;
+  margin: 6px;
+
+  font-size: 1.2rem;
+  position: relative;
+
+  animation-duration: 100ms;
+  animation-direction: alternate;
+  animation-timing-function: ease-in;
+  animation-iteration-count: 4;
+
+  &.error,
+  &.success {
+    border-radius: 8px;
+    font-weight: bold;
+  }
+
+  &.error {
+    animation-name: flash-error;
+    background: repeating-linear-gradient(30deg, #f4c3c6, #f4c3c6 1em, #e0b4b7 1em, #e0b4b7 2em);
+  }
+
+  &.success {
+    animation-name: flash-success;
+    background-color: #defabb;
+    outline: 1px solid green;
+  }
+
+  .hide {
+    color: black;
+    margin-left: 6px;
+    cursor: pointer;
+  }
+}
+
+@keyframes flash-error {
+  0% {
+    left: 6px;
+    outline: 2px solid red;
+  }
+  100% {
+    left: 0;
+    outline: 4px solid red;
+  }
+}
+
+@keyframes flash-success {
+  0% {
+    bottom: -6px;
+    outline: 2px solid green;
+  }
+  100% {
+    bottom: 0;
+    outline: 4px solid green;
+  }
+}
