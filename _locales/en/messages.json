@@ -54,7 +54,7 @@
     "message": "Show count of auto transformation on toolbar button"
   },
   "options_headerReplacement": {
-    "message": "Replacement Accept-Language request header"
+    "message": "Replacement <code>Accept-Language</code> request header: "
   },
   "options_defaultValueIs": {
     "message": "Default value: "
@@ -96,11 +96,8 @@
     "message": "Can omit <code>-XX</code> part within <code>xx-XX</code>, example: set <code>zh</code> can also include <code>zh-TW</code> and <code>zh_TW</code>"
   },
 
-  "popup_enableAutoTrigger": {
-    "message": "Continue auto transform"
-  },
-  "popup_disableAutoTrigger": {
-    "message": "Suspend auto transform"
+  "popup_toggleAutoTrigger": {
+    "message": "Auto transform"
   },
   "popup_triggerOnPage": {
     "message": "Transform current page"

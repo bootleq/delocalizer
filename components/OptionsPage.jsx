@@ -143,7 +143,7 @@ const Form = () => {
         <hr />
 
         <label>
-          {t('_headerReplacement')}
+          <span dangerouslySetInnerHTML={{__html: t('_headerReplacement')}} />
           <input type='text' name='preferredLang' value={form.preferredLang || ''} onChange={onTextChange} />
         </label>
 

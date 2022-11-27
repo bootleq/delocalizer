@@ -71,7 +71,12 @@ const Main = () => {
   return (
     <>
       <ul>
-        <li data-action='toggle' onClick={onAction}>{suspended === 'yes' ? t('_enableAutoTrigger') : t('_disableAutoTrigger')}</li>
+        <li>
+          <label>
+            {t('_toggleAutoTrigger')}
+            <input type='checkbox' data-action='toggle' className='toggle' checked={suspended === 'no'} onChange={onAction} />
+          </label>
+        </li>
         <li data-action='delocalize-now' onClick={onAction}>{t('_triggerOnPage')}</li>
         <li data-action='clear-badge' onClick={onAction} className={showBadge === 'no' ? 'disabled' : ''}>{t('_clearBadge')}</li>
         <li data-action='open-options' onClick={onAction}>{t('_openOptionsPage')}</li>

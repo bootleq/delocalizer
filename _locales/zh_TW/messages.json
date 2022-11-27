@@ -44,7 +44,7 @@
     "message": "在工具列按鈕上顯示自動轉換計數"
   },
   "options_headerReplacement": {
-    "message": "替換用的 Accept-Language 請求標頭"
+    "message": "替換用的 <code>Accept-Language</code> 請求標頭："
   },
   "options_defaultValueIs": {
     "message": "預設值："
@@ -86,11 +86,8 @@
     "message": "<code>xx-XX</code> 後的 <code>-XX</code> 可以省略，例：設定 <code>zh</code> 也能包含 <code>zh-TW</code> 和 <code>zh_TW</code>"
   },
 
-  "popup_enableAutoTrigger": {
-    "message": "開啟自動轉換"
-  },
-  "popup_disableAutoTrigger": {
-    "message": "暫停自動轉換"
+  "popup_toggleAutoTrigger": {
+    "message": "自動轉換"
   },
   "popup_triggerOnPage": {
     "message": "轉換目前頁面"
