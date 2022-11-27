@@ -34,7 +34,8 @@ fieldset {
 }
 
 label {
-  display: block;
+  display: flex;
+  align-items: center;
 
   input[type='radio'] {
     width: 1.5em;
@@ -45,6 +46,55 @@ button,
 input[type='button'] {
   &:enabled {
     cursor: pointer;
+  }
+}
+
+input.toggle[type='checkbox'] {
+  --btn-width: 2.8em;
+  --btn-height: 1.4em;
+  --dot-width: 1em;
+  --dot-height: 1em;
+  --checked-bg: #0061e0;
+  --border-width: 3px;
+
+  appearance: none;
+  width: var(--btn-width);
+  height: var(--btn-height);
+  display: inline-flex;
+  align-items: center;
+  border-radius: 1em;
+  box-sizing: border-box;
+  border-width: var(--border-width);
+  border-color: rgba(80,80,80,0.6);
+  margin: 0 8px;
+  background: rgba(80,80,80,0.4);
+  cursor: pointer;
+
+  &::before {
+    display: block;
+    width: var(--dot-width);
+    height: var(--dot-height);
+    content: '';
+    border-radius: 50%;
+    background: white;
+    transition: transform 160ms;
+    transform: translateX(var(--border-width));
+  }
+
+  &:checked {
+    background-color: var(--checked-bg);
+    border-color: var(--checked-bg);
+
+    &::before {
+      transform: translateX(calc(var(--btn-width) - var(--dot-width) - var(--border-width)));
+    }
+  }
+
+  &:hover {
+    background-color: rgba(80,80,80,0.6);
+    &:checked {
+      background-color: #0041c0;
+    }
   }
 }
 

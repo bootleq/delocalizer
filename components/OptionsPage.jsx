@@ -137,7 +137,7 @@ const Form = () => {
       <fieldset id='details' disabled={busy}>
         <label>
           {t('_showTransformedCount')}
-          <input type='checkbox' name='showBadge' checked={form.showBadge === 'yes'} onChange={onCheckSwitch} />
+          <input type='checkbox' className='toggle' name='showBadge' checked={form.showBadge === 'yes'} onChange={onCheckSwitch} />
         </label>
 
         <hr />
