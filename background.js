@@ -192,6 +192,12 @@ async function doToggle(sendResponse) {
   updateActionIcon();
   sendResponse();
 }
+
+async function doClearBadge(sendResponse) {
+  mutatedRequestCount = 0;
+  browser.browserAction.setBadgeText({text: ''});
+  sendResponse();
+}
 // }}}
 
 function onMessage(message, sender, sendResponse) {
@@ -202,6 +208,9 @@ function onMessage(message, sender, sendResponse) {
       return true;
     case 'toggle':
       doToggle(sendResponse);
+      return true;
+    case 'clear-badge':
+      doClearBadge(sendResponse);
       return true;
     }
   } catch (e) {
@@ -216,6 +225,7 @@ function updateActionIcon() {
   browser.browserAction.setIcon({path: iconPath});
 
   if (config.showBadge === 'no') {
+    mutatedRequestCount = 0;
     browser.browserAction.setBadgeText({text: ''});
   }
 }

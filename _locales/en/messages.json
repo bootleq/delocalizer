@@ -105,6 +105,9 @@
   "popup_triggerOnPage": {
     "message": "Transform current page"
   },
+  "popup_clearBadge": {
+    "message": "Clear count"
+  },
   "popup_openOptionsPage": {
     "message": "Options"
   }

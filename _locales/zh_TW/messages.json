@@ -95,6 +95,9 @@
   "popup_triggerOnPage": {
     "message": "轉換目前頁面"
   },
+  "popup_clearBadge": {
+    "message": "清除計數"
+  },
   "popup_openOptionsPage": {
     "message": "選項"
   }

@@ -10,13 +10,20 @@ const t = translator('popup');
 
 const Main = () => {
   const [suspended, setSuspended] = useState();
+  const [showBadge, setShowBadge] = useState();
   const [flash, setFlash] = useState({});
 
   useEffect(() => {
-    browser.storage.local.get('suspended').then(c => setSuspended(c.suspended));
+    browser.storage.local.get(['suspended', 'showBadge']).then(c => {
+      setSuspended(c.suspended);
+      setShowBadge(c.showBadge);
+    });
     browser.storage.onChanged.addListener(c => {
-      const newValue = c.suspended?.newValue;
-      newValue && setSuspended(newValue);
+      let v;
+      v = c.suspended?.newValue;
+      v && setSuspended(v);
+      v = c.showBadge?.newValue;
+      v && setShowBadge(v);
     });
   }, []);
 
@@ -30,6 +37,9 @@ const Main = () => {
       break;
     case 'delocalize-now':
       deLocalizeNow();
+      break;
+    case 'clear-badge':
+      clearBadge();
       break;
     case 'open-options':
       openOptionsPage();
@@ -50,6 +60,10 @@ const Main = () => {
     result?.success === 'success' && window.close();
   };
 
+  function clearBadge() {
+    browser.runtime.sendMessage({action: 'clear-badge'});
+  };
+
   function openOptionsPage() {
     browser.runtime.openOptionsPage();
   };
@@ -59,6 +73,7 @@ const Main = () => {
       <ul>
         <li data-action='toggle' onClick={onAction}>{suspended === 'yes' ? t('_enableAutoTrigger') : t('_disableAutoTrigger')}</li>
         <li data-action='delocalize-now' onClick={onAction}>{t('_triggerOnPage')}</li>
+        <li data-action='clear-badge' onClick={onAction} className={showBadge === 'no' ? 'disabled' : ''}>{t('_clearBadge')}</li>
         <li data-action='open-options' onClick={onAction}>{t('_openOptionsPage')}</li>
       </ul>
       <div className='flash-box'>
