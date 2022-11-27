@@ -50,11 +50,11 @@
     "message": "Detail settings",
     "description": "Options page section header, for detail items"
   },
-  "options_headerReplacement": {
-    "message": "Replacement request header"
+  "options_showTransformedCount": {
+    "message": "Show count of auto transformation on toolbar button"
   },
-  "options_acceptLanguageHeader": {
-    "message": "Accept-Language"
+  "options_headerReplacement": {
+    "message": "Replacement Accept-Language request header"
   },
   "options_defaultValueIs": {
     "message": "Default value: "

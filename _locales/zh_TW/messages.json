@@ -40,11 +40,11 @@
   "options_headerDetails": {
     "message": "細部設定"
   },
-  "options_headerReplacement": {
-    "message": "替換用的請求標頭"
+  "options_showTransformedCount": {
+    "message": "在工具列按鈕上顯示自動轉換計數"
   },
-  "options_acceptLanguageHeader": {
-    "message": "Accept-Language"
+  "options_headerReplacement": {
+    "message": "替換用的 Accept-Language 請求標頭"
   },
   "options_defaultValueIs": {
     "message": "預設值："

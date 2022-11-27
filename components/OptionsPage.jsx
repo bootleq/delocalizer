@@ -79,6 +79,13 @@ const Form = () => {
     setForm(prev => ({...prev, [name]: value}));
   }
 
+  function onCheckSwitch(e) {
+    const $e = e.target;
+    const { name, checked } = $e;
+    const value = checked ? 'yes' : 'no';
+    setForm(prev => ({...prev, [name]: value}));
+  }
+
   async function onSave(e) {
     e.preventDefault();
     const $form = formRef.current;
@@ -128,14 +135,20 @@ const Form = () => {
       <h1>{t('_headerDetails')}</h1>
 
       <fieldset id='details' disabled={busy}>
-        <legend>{t('_headerReplacement')}</legend>
         <label>
-          {t('_acceptLanguageHeader')}
+          {t('_showTransformedCount')}
+          <input type='checkbox' name='showBadge' checked={form.showBadge === 'yes'} onChange={onCheckSwitch} />
+        </label>
+
+        <hr />
+
+        <label>
+          {t('_headerReplacement')}
           <input type='text' name='preferredLang' value={form.preferredLang || ''} onChange={onTextChange} />
         </label>
 
         <small className='hint'>
-          {t('_defaultValueIs')}<code>en-US,en,*;q=0.5 </code>
+          {t('_defaultValueIs')}<code>en-US,en,*;q=0.5</code>
         </small>
       </fieldset>
     </form>

@@ -11,6 +11,7 @@ const defaults = {
   targetHosts: [],
   targetLocales: ['zh', 'ja'],
   preferredLang: 'en-US,en,*;q=0.5',
+  showBadge: 'yes',
   suspended: 'no',
 };
 

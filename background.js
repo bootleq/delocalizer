@@ -17,6 +17,7 @@ let config = {
   targetLocales: [],
   targetHosts: [],
   preferredLang: '',
+  showBadge: 'yes',
   suspended: 'no',
 };
 
@@ -133,7 +134,7 @@ function onErrorOccurred({ requestId }) {
 }
 
 function onCompleted({ requestId }) {
-  if (mutatedRequests.has(requestId)) {
+  if (config.showBadge === 'yes' && mutatedRequests.has(requestId)) {
     mutatedRequests.delete(requestId);
     browser.browserAction.getBadgeText({}).then(t => {
       let num = Number.parseInt(t, 10);
@@ -213,6 +214,10 @@ function onMessage(message, sender, sendResponse) {
 function updateActionIcon() {
   const iconPath = config.suspended === 'yes' ? 'icons/outline-128.png' : 'icons/128.png';
   browser.browserAction.setIcon({path: iconPath});
+
+  if (config.showBadge === 'no') {
+    browser.browserAction.setBadgeText({text: ''});
+  }
 }
 
 loadConfig().then(c => {
