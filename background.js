@@ -2,7 +2,7 @@
 
 import browser from 'webextension-polyfill';
 
-import { load as loadConfig, withDefaults } from './config';
+import { load as loadConfig, save as saveConfig, withDefaults } from './config';
 import URLLocalePatterns from './URLLocalePatterns';
 
 // Basic flow:
@@ -230,6 +230,10 @@ function updateActionIcon() {
   }
 }
 
+function onInstalled() {
+  loadConfig().then(saveConfig); // save initial config for first time install
+}
+
 loadConfig().then(c => {
   config = c;
   updateActionIcon();
@@ -243,3 +247,5 @@ browser.storage.onChanged.addListener(onStorageChange);
 
 browser.browserAction.setBadgeBackgroundColor({color: '#444'});
 browser.runtime.onMessage.addListener(onMessage);
+
+browser.runtime.onInstalled.addListener(onInstalled);
