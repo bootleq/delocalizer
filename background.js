@@ -21,6 +21,7 @@ let config = {
 };
 
 const mutatedRequests = new Set(); // flag request to avoid redirect loop
+let mutatedRequestCount = 0;
 let actionRunningTabId; // flag for user action to force redirect, modify Accept-Language if in this tab
 
 const messages = {
@@ -117,15 +118,31 @@ function onBeforeSendHeaders(details) {
 
   if (mutatedRequests.has(requestId) || tabId === actionRunningTabId) {
     mutateHeader(headers, 'accept-language', config.preferredLang);
+
+    if (mutatedRequests.has(requestId)) {
+      mutatedRequestCount = mutatedRequestCount + 1;
+    }
   }
   actionRunningTabId = null;
-  // mutatedRequests.delete(requestId); // TODO: cleanup
 
   return {requestHeaders: headers};
 }
 
 function onErrorOccurred({ requestId }) {
   mutatedRequests.delete(requestId);
+}
+
+function onCompleted({ requestId }) {
+  if (mutatedRequests.has(requestId)) {
+    mutatedRequests.delete(requestId);
+    browser.browserAction.getBadgeText({}).then(t => {
+      let num = Number.parseInt(t, 10);
+      if (Number.isNaN(num)) {
+        num = 0;
+      }
+      browser.browserAction.setBadgeText({text: `${num + 1}`});
+    });
+  }
 }
 
 const filter = {
@@ -206,6 +223,8 @@ loadConfig().then(c => {
 browser.webRequest.onBeforeRequest.addListener(onBeforeRequest, filter, ['blocking']);
 browser.webRequest.onBeforeSendHeaders.addListener(onBeforeSendHeaders, filter, ['blocking', 'requestHeaders']);
 browser.webRequest.onErrorOccurred.addListener(onErrorOccurred, filter);
+browser.webRequest.onCompleted.addListener(onCompleted, filter);
 browser.storage.onChanged.addListener(onStorageChange);
 
+browser.browserAction.setBadgeBackgroundColor({color: '#444'});
 browser.runtime.onMessage.addListener(onMessage);
