@@ -7,6 +7,7 @@ import DomainRule from '../DomainRule';
 import { translator } from '../utils';
 import '../options.scss';
 
+import ImportExport from './ImportExport';
 import TargetReferrers from './TargetReferrers';
 import TargetHosts from './TargetHosts';
 import TargetLocales from './TargetLocales';
@@ -81,12 +82,14 @@ const Form = () => {
 
   const formRef = useRef();
 
-  useEffect(() => {
+  useEffect(reloadConfig, []);
+
+  function reloadConfig() {
     loadConfig().then(c => {
       setForm(prepopulate(c));
       setBusy(false);
     });
-  }, []);
+  }
 
   function onTextChange(e) {
     const $e = e.target;
@@ -139,6 +142,8 @@ const Form = () => {
           : <span className='save-reminder'>{t('_saveReminder')}</span>
         }
         <button onClick={onSave}>{t('_save')}</button>
+
+        <ImportExport setBusy={setBusy} setMsg={setMsg} reloadConfig={reloadConfig}  />
       </fieldset>
 
       <h1>{t('_headerTriggerWhen')}</h1>

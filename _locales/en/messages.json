@@ -42,6 +42,12 @@
   "options_save": {
     "message": "Save"
   },
+  "options_imported": {
+    "message": "Import successed"
+  },
+  "options_invalidImport": {
+    "message": "Invalid import file content"
+  },
   "options_headerTriggerWhen": {
     "message": "Do auto transform if",
     "description": "Options page section header, when should we do auto translation"

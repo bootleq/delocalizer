@@ -34,6 +34,12 @@
   "options_save": {
     "message": "儲存"
   },
+  "options_imported": {
+    "message": "匯入成功"
+  },
+  "options_invalidImport": {
+    "message": "匯入檔案內容不正確"
+  },
   "options_headerTriggerWhen": {
     "message": "滿足以下條件才轉換"
   },
