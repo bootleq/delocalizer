@@ -57,7 +57,7 @@ const Main = () => {
     const tab = (await browser.tabs.query({ currentWindow: true, active: true }))[0];
     const result = await browser.runtime.sendMessage({action: 'delocalize', tabId: tab.id, url: tab.url});
     setFlash(result);
-    result?.success === 'success' && window.close();
+    result?.status === 'success' && window.close();
   };
 
   function clearBadge() {
