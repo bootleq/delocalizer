@@ -197,6 +197,62 @@ code {
   }
 }
 
+#domain-rules {
+  width: 100%;
+  min-width: 510px;
+  border-collapse: collapse;
+
+  tbody tr:nth-child(2n) {
+    background-color: #f2f2f2;
+  }
+  th {
+    background-color: #efeff2;
+    font-weight: normal;
+    font-size: initial;
+
+    &:nth-child(1) {
+      display: block;
+      overflow: hidden;
+      resize: horizontal;
+      text-align: start;
+      min-width: 100%;
+    }
+  }
+  th, td {
+    min-width: 4em;
+    text-align: center;
+    padding: 2px 0;
+    border-right: 1px dotted #444;
+    border-bottom: 1px dotted #444;
+
+    input[type='text'] {
+      width: 4em;
+      font-family: var(--font-code);
+    }
+
+    &:nth-child(1) {
+      resize: horizontal;
+      input {
+        width: 100%;
+      }
+    }
+    &:last-child {
+      min-width: unset;
+    }
+  }
+  .locale-dir {
+    input {
+      text-align: center;
+    }
+    > span {
+      margin: 0 2px;
+    }
+  }
+  input.toggle[type='checkbox'] {
+    margin: 0;
+  }
+}
+
 #details {
   input[type='text'] {
     padding: 2px 5px;

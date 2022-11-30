@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { map as RMap, trim as RTrim } from 'ramda';
 import classNames from 'classnames';
 
 import { load as loadConfig, save as saveConfig } from '../config';
+import DomainRule from '../DomainRule';
 import { translator } from '../utils';
 import '../options.scss';
 
 import TargetReferrers from './TargetReferrers';
 import TargetHosts from './TargetHosts';
 import TargetLocales from './TargetLocales';
+import DomainRules from './DomainRules';
 
 const t = translator('options');
 
@@ -24,6 +27,14 @@ const prepopulate = (config) => { // Convert config -> form
     );
   });
 
+  if (form['domainRules'].length === 0) {
+    form['domainRules'].push(new DomainRule());
+  }
+  form['domainRules'] = form['domainRules'].reduce(
+    (acc, item, idx) => ({...acc, [idx]: item}),
+    {}
+  );
+
   return form;
 };
 
@@ -36,6 +47,10 @@ const serialize = (form) => { // Convert form -> config
                   .sort(a => a[0])
                   .map(a => a[1].trim());
   });
+
+  config['domainRules'] = Object.entries(config['domainRules'])
+                            .sort(a => a[0])
+                            .map(a => RMap(RTrim, a[1]));
 
   return config;
 };
@@ -129,8 +144,15 @@ const Form = () => {
       <h1>{t('_headerTriggerWhen')}</h1>
 
       <TargetReferrers {...commonListProps}></TargetReferrers>
-      <TargetHosts {...commonListProps}></TargetHosts>
-      <TargetLocales {...commonListProps}></TargetLocales>
+      {/* <TargetHosts {...commonListProps}></TargetHosts> */}
+      {/* <TargetLocales {...commonListProps}></TargetLocales> */}
+
+      <h1>自動轉換</h1>
+
+      <fieldset>
+        <legend>個別網站設定</legend>
+        <DomainRules {...commonListProps}></DomainRules>
+      </fieldset>
 
       <h1>{t('_headerDetails')}</h1>
 
