@@ -10,6 +10,7 @@ const defaults = {
   targetReferrers: ['www.google.com'],
   targetHosts: [],
   targetLocales: [],
+  domainRules: [],
   preferredLang: 'en-US,en,*;q=0.5',
   showBadge: 'yes',
   suspended: 'no',

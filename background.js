@@ -4,6 +4,7 @@ import browser from 'webextension-polyfill';
 
 import { load as loadConfig, save as saveConfig, withDefaults } from './config';
 import URLLocalePatterns from './URLLocalePatterns';
+import DomainRule, { match as matchRule, replaceMatchedSegment } from './DomainRule';
 
 // Basic flow:
 //
@@ -16,6 +17,7 @@ let config = {
   targetReferrers: [],
   targetLocales: [],
   targetHosts: [],
+  domainRules: [],
   preferredLang: '',
   showBadge: 'yes',
   suspended: 'no',
@@ -37,19 +39,6 @@ const messages = {
   }
 };
 
-function matchURLLocalePart(url, {targetLocalesAny, targetLocales}) {
-  let head;
-
-  head = url.pathname.match(URLLocalePatterns.pathname)?.[0] ||
-         url.hostname.match(URLLocalePatterns.subdomain)?.[0];
-
-  if (!head) return;
-
-  if (targetLocalesAny === 'yes' || targetLocales.find(locale => head.replace('/', '').startsWith(locale))) {
-    return head;
-  }
-}
-
 function detectReferrer(url, {targetReferrersAny, targetReferrers}) {
   if (targetReferrersAny === 'yes') {
     return true;
@@ -61,25 +50,19 @@ function detectReferrer(url, {targetReferrersAny, targetReferrers}) {
   return targetReferrers.includes(referrer.hostname);
 }
 
-function detectDestHost(url, {targetHostsAny, targetHosts}) {
-  if (targetHostsAny === 'yes') {
-    return true;
-  }
-  const u = url.href.substring((url.protocol + '//').length);
+function testRequestDomain(url, {domainRules}) {
+  const domain = url.hostname;
+  let regexFilter, regexSubstitution, newUrl;
+  let seg;
 
-  return targetHosts.some(host => {
-    if (host.startsWith('/')) {
-      let pattern;
-      try {
-        pattern = new RegExp(host.substring(1));
-      } catch (e) {
-        console.error(`Can't build RegExp from '${host}'`);
-      }
-      return u.match(pattern);
-    } else {
-      return u.includes(host);
-    }
+  const matchedRule = domainRules.find(r => {
+    seg = matchRule(r, url);
+    return seg;
   });
+
+  if (matchedRule) {
+    return replaceMatchedSegment(matchedRule, url, seg);
+  }
 }
 
 function mutateHeader(headers, name, newValue) {
@@ -102,15 +85,10 @@ function onBeforeRequest(details) {
 
   if (!detectReferrer(originUrl, config)) return;
 
-  const requestUrl = new URL(url);
-  if (!detectDestHost(requestUrl, config)) return;
-
-  const oldLocale = matchURLLocalePart(requestUrl, config);
-
-  if (oldLocale) {
-    const newHref = requestUrl.href.replace(oldLocale, '');
+  const newUrl = testRequestDomain(new URL(url), config);
+  if (newUrl) {
     mutatedRequests.add(requestId);
-    return { redirectUrl: newHref };
+    return { redirectUrl: newUrl };
   }
 }
 
@@ -173,12 +151,11 @@ async function doDelocalize(url, tabId, sendResponse) {
     return;
   }
 
-  const oldLocale = matchURLLocalePart(url, config);
+  const newUrl = testRequestDomain(url, config);
 
-  if (oldLocale) {
-    const newHref = url.href.replace(oldLocale, '');
+  if (newUrl) {
     actionRunningTabId = tabId;
-    await browser.tabs.update({url: newHref});
+    await browser.tabs.update({url: newUrl});
     sendResponse({status: 'success', msg: messages.flash.executed});
   } else {
     sendResponse({status: 'error', msg: messages.error.URLLocaleMismatch});
