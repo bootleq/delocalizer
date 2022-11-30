@@ -37,6 +37,8 @@
     "build": "webpack",
     "build:prod": "cross-env NODE_ENV=production webpack",
     "test": "jest",
+    "test:watch": "jest --watch",
+    "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
     "dev:chrome": "cross-env BROWSER=chrome webpack watch",
     "build:chrome": "cross-env BROWSER=chrome webpack",
     "build:prod:chrome": "cross-env NODE_ENV=production BROWSER=chrome webpack",
