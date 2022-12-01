@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import browser from 'webextension-polyfill';
 import classNames from 'classnames';
 
-import { isBlank, translator } from './utils';
+import { isBlank, translator, getBrowserInfo } from './utils';
 import './popup.scss';
 
 const t = translator('popup');
@@ -25,6 +25,8 @@ const Main = () => {
       v = c.showBadge?.newValue;
       v && setShowBadge(v);
     });
+
+    getBrowserInfo().then(({name}) => name && document.documentElement.classList.add(name.toLowerCase()));
   }, []);
 
   const onAction = (e) => {

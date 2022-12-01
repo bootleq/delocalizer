@@ -34,6 +34,14 @@ function translator(prefix) {
     }
     return browser.i18n.getMessage(key, ...args);
   };
-};
+}
 
-export { isBlank, slice, translator };
+async function getBrowserInfo() {
+  if (browser.runtime.hasOwnProperty('getBrowserInfo')) {
+    return await browser.runtime.getBrowserInfo();
+  }
+
+  return {name: 'chrome'}; // return dummy object for chrome is enough
+}
+
+export { isBlank, slice, translator, getBrowserInfo };
