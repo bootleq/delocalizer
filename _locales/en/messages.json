@@ -83,15 +83,6 @@
   "options_targetReferrerHint": {
     "message": "Input <code>hostname</code>, e.g., <code>www.google.com</code>"
   },
-  "options_targetLocales": {
-    "message": "Destination URL's locale segment"
-  },
-  "options_targetLocalesAnyHTML": {
-    "message": "Any looks alike (e.g., <code>en</code> or <code>en-US</code>)"
-  },
-  "options_targetLocalesHint": {
-    "message": "Can omit <code>-XX</code> part within <code>xx-XX</code>, example: set <code>zh</code> can also include <code>zh-TW</code> and <code>zh_TW</code>"
-  },
 
   "popup_toggleAutoTrigger": {
     "message": "Auto transform"

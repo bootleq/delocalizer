@@ -73,15 +73,6 @@
   "options_targetReferrerHint": {
     "message": "輸入 <code>hostname</code>，例如 <code>www.google.com</code>"
   },
-  "options_targetLocales": {
-    "message": "目的網址的地區（locale）部分"
-  },
-  "options_targetLocalesAnyHTML": {
-    "message": "任何長得像的（例如 <code>en</code> 或 <code>en-US</code>）"
-  },
-  "options_targetLocalesHint": {
-    "message": "<code>xx-XX</code> 後的 <code>-XX</code> 可以省略，例：設定 <code>zh</code> 也能包含 <code>zh-TW</code> 和 <code>zh_TW</code>"
-  },
 
   "popup_toggleAutoTrigger": {
     "message": "自動轉換"

@@ -15,7 +15,6 @@ import DomainRule, { match as matchRule, replaceMatchedSegment } from './DomainR
 
 let config = {
   targetReferrers: [],
-  targetLocales: [],
   domainRules: [],
   preferredLang: '',
   showBadge: 'yes',
