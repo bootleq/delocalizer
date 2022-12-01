@@ -2,10 +2,22 @@
   --font-code: 'Cascadia Code', 'Roboto Mono', 'DejaVu Sans Mono', Monaco, Consolas, monospace;
 }
 
+html {
+  &.firefox {
+    body {
+      overflow-y: hidden; // the height will be auto adjusted by browser, hide scroll to avoid flashing when adding list item
+    }
+  }
+
+  &.chrome {
+    font-size: 12px;
+    padding: 0 2em;
+  }
+}
+
 body {
   user-select: text;
   cursor: auto;
-  overflow-y: hidden; // the height will be auto adjusted by browser, hide scroll to avoid flashing when adding list item
 }
 
 h1 {
@@ -204,8 +216,9 @@ code {
 
 #domain-rules {
   width: 100%;
-  min-width: 510px;
+  min-width: 550px;
   border-collapse: collapse;
+  margin-bottom: 6px;
 
   tbody tr:nth-child(2n) {
     background-color: #f2f2f2;
@@ -213,13 +226,13 @@ code {
   th {
     background-color: #efeff2;
     font-weight: normal;
-    font-size: initial;
+    font-size: 1.1rem;
+    border-right: 1px dotted #444;
 
     &:nth-child(1) {
       display: block;
       overflow: hidden;
       resize: horizontal;
-      text-align: start;
       min-width: 100%;
     }
   }
@@ -227,8 +240,6 @@ code {
     min-width: 4em;
     text-align: center;
     padding: 2px 0;
-    border-right: 1px dotted #444;
-    border-bottom: 1px dotted #444;
 
     input[type='text'] {
       width: 4em;
@@ -238,7 +249,8 @@ code {
     &:nth-child(1) {
       resize: horizontal;
       input {
-        width: 100%;
+        width: 99%;
+        box-sizing: border-box;
       }
     }
     &:last-child {
