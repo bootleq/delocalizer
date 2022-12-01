@@ -68,7 +68,7 @@ if (ENV == 'production') {
 module.exports = {
   mode: ENV,
   entry: {
-    background: './background.js',
+    background: BROWSER === 'firefox' ? './background.js' : './background.worker.js',
     options: './options.jsx',
     popup: './popup.jsx'
   },
