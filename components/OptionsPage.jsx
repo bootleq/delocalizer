@@ -78,13 +78,13 @@ const Form = () => {
 
   const formRef = useRef();
 
-  useEffect(reloadConfig, []);
+  useEffect(() => {
+    loadConfig().then(resetFormFromConfig);
+  }, []);
 
-  function reloadConfig() {
-    loadConfig().then(c => {
-      setForm(prepopulate(c));
-      setBusy(false);
-    });
+  function resetFormFromConfig(config) {
+    setForm(prepopulate(config));
+    setBusy(false);
   }
 
   function onTextChange(e) {
@@ -139,7 +139,7 @@ const Form = () => {
         }
         <button onClick={onSave}>{t('_save')}</button>
 
-        <ImportExport setBusy={setBusy} setMsg={setMsg} reloadConfig={reloadConfig}  />
+        <ImportExport setBusy={setBusy} setMsg={setMsg} resetConfig={resetFormFromConfig}  />
       </fieldset>
 
       {/* <h1>{t('_headerTriggerWhen')}</h1> */}

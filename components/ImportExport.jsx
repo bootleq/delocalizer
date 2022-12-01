@@ -1,11 +1,11 @@
 import React, { useRef } from 'react';
 
-import { load as loadConfig, save as saveConfig } from '../config';
+import { load as loadConfig } from '../config';
 import { translator } from '../utils';
 
 const t = translator('options');
 
-const ImportExport = ({setBusy, setMsg, reloadConfig}) => {
+const ImportExport = ({setBusy, setMsg, resetConfig}) => {
   const fileRef = useRef();
 
   async function onExport(e) {
@@ -38,9 +38,8 @@ const ImportExport = ({setBusy, setMsg, reloadConfig}) => {
       const json = await e.target.files[0]?.text();
       const config = JSON.parse(json);
       if (Object.keys(config).includes('domainRules')) { // just tiny quick check
-        await saveConfig(config);
+        resetConfig(config);
         setMsg({type: 'success', msg: t('_imported')});
-        reloadConfig();
       } else {
         setMsg({type: 'error', msg: t('_invalidImport')});
       }
@@ -53,11 +52,11 @@ const ImportExport = ({setBusy, setMsg, reloadConfig}) => {
   }
 
   return (
-    <>
+    <div className='import-export'>
       <button onClick={onExport}>匯出</button>
       <button onClick={onImportPicker}>匯入</button>
       <input id='import-file' ref={fileRef} type='file' accept='.json' onChange={onImport} />
-    </>
+    </div>
   );
 };
 

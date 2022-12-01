@@ -35,7 +35,7 @@
     "message": "儲存"
   },
   "options_imported": {
-    "message": "匯入成功"
+    "message": "匯入成功（記得存檔才會生效）"
   },
   "options_invalidImport": {
     "message": "匯入檔案內容不正確"
