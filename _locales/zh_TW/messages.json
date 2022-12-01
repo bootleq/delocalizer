@@ -15,8 +15,8 @@
   "error_otherError": {
     "message": "錯誤："
   },
-  "error_invalidHostPattern": {
-    "message": "正規表達式無法解析"
+  "error_pathWildMatch": {
+    "message": "尋找「路徑」的設定不接受從 * 轉換為任意語言（空字串）"
   },
   "flash_executed": {
     "message": "已執行"

@@ -19,9 +19,9 @@
     "message": "Error: ",
     "description": "General exception, error message will also be shown after it"
   },
-  "error_invalidHostPattern": {
-    "message": "Invalid reglur expression",
-    "description": "Form validation error in options page, host pattern invalid"
+  "error_pathWildMatch": {
+    "message": "Path finding doesn't allow convert from * to '' (empty string) locale"
+    "description": "Form validation error in options page, path type rule rejects locale from * to '' (emtpy string), to avoid too generic match"
   },
   "flash_executed": {
     "message": "Executed",

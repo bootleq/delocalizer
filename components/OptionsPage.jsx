@@ -58,19 +58,19 @@ const serialize = (form) => { // Convert form -> config
 
 // Extra validation for Hosts, basic ones were simply checked by browser
 const validate = ($form) => {
-  const $hosts = Array.from($form.querySelectorAll('[name="targetHosts[]"]'));
   let valid = true;
-  $hosts.forEach(h => h.setCustomValidity(''));
 
-  $hosts.filter(h => h.matches('[value^="/"]:enabled')).forEach(h => {
-    const pattern = h.value.substring(1);
-    try {
-      new RegExp(pattern);
-    } catch (e) {
-      h.setCustomValidity(t('error_invalidHostPattern'));
+  const $rules = Array.from($form.querySelectorAll('#domain-rules > tbody > tr'));
+  $rules.forEach(tr => {
+    const $inputs = ['position', 'fromLocale', 'toLocale'].reduce((acc, k) => ({...acc, [k]: tr.querySelector(`[name$='.${k}']`)}), {});
+    $inputs.toLocale.setCustomValidity('');
+
+    if ($inputs.position.value === '/path' && $inputs.fromLocale.value === '*' && $inputs.toLocale.value === '') {
       valid = false;
+      $inputs.toLocale.setCustomValidity(t('error_pathWildMatch'));
     }
   });
+
   return valid;
 };
 

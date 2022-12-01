@@ -9,8 +9,8 @@ class DomainRule {
   constructor(config) {
     this.fromLocale = config?.fromLocale ?? '*';    // zh, zh-TW, .etc. "*" for any locales
     this.position   = config?.position   ?? 'sub.'; // "sub." | "/path"
-    this.domain     = config?.domain     ?? 'reactjs.org';
-    this.toLocale   = config?.toLocale   ?? 'en';   // leave blank for auto detection
+    this.domain     = config?.domain     ?? '';
+    this.toLocale   = config?.toLocale   ?? '';     // leave blank for auto detection
     this.enabled    = config?.enabled    ?? 'yes';
   }
 }
