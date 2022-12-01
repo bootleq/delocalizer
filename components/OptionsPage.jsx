@@ -9,7 +9,6 @@ import '../options.scss';
 
 import ImportExport from './ImportExport';
 import TargetReferrers from './TargetReferrers';
-import TargetHosts from './TargetHosts';
 import TargetLocales from './TargetLocales';
 import DomainRules from './DomainRules';
 
@@ -18,7 +17,7 @@ const t = translator('options');
 const prepopulate = (config) => { // Convert config -> form
   const {...form} = config;
 
-  ['targetReferrers', 'targetHosts', 'targetLocales'].forEach(k => {
+  ['targetReferrers', 'targetLocales'].forEach(k => {
     if (form[k].length === 0) {
       form[k].push(''); // initial blank input
     }
@@ -42,7 +41,7 @@ const prepopulate = (config) => { // Convert config -> form
 const serialize = (form) => { // Convert form -> config
   const {...config} = form;
 
-  ['targetReferrers', 'targetLocales', 'targetHosts'].forEach(k => {
+  ['targetReferrers', 'targetLocales'].forEach(k => {
     config[k] = Object.entries(config[k])
                   .filter(a => a[1].trim() !== '')
                   .sort(a => a[0])
@@ -149,7 +148,6 @@ const Form = () => {
       <h1>{t('_headerTriggerWhen')}</h1>
 
       <TargetReferrers {...commonListProps}></TargetReferrers>
-      {/* <TargetHosts {...commonListProps}></TargetHosts> */}
       {/* <TargetLocales {...commonListProps}></TargetLocales> */}
 
       <h1>自動轉換</h1>

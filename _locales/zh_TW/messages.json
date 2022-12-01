@@ -64,15 +64,6 @@
   "options_addNew": {
     "message": "新增"
   },
-  "options_targetHost": {
-    "message": "目的網址"
-  },
-  "options_targetHostAny": {
-    "message": "任何網址"
-  },
-  "options_targetHostHint": {
-    "message": "不要包含 <code>https://</code> 部份，範例：<code>reactjs.org/docs</code>；<br /> 以 <code>/</code> 開頭可使用正規表達式，例如 <code>/^(docs|msdn)\\.microsoft</code>"
-  },
   "options_targetReferrer": {
     "message": "點開連結前的網站（Referrer）"
   },

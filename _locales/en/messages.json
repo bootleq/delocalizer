@@ -74,15 +74,6 @@
   "options_addNew": {
     "message": "Add"
   },
-  "options_targetHost": {
-    "message": "Destination URLs"
-  },
-  "options_targetHostAny": {
-    "message": "Any URLs"
-  },
-  "options_targetHostHint": {
-    "message": "Skip <code>https://</code> part, example: <code>reactjs.org/docs</code>;<br /> Prefix with <code>/</code> to use regular expression, e.g., <code>/^(docs|msdn)\\.microsoft</code>"
-  },
   "options_targetReferrer": {
     "message": "Websites before click the link (Referrer)"
   },

@@ -5,10 +5,8 @@ import browser from "webextension-polyfill";
 
 const defaults = {
   targetReferrersAny: 'no',
-  targetHostsAny: 'yes',
   targetLocalesAny: 'yes',
   targetReferrers: ['www.google.com'],
-  targetHosts: [],
   targetLocales: [],
   domainRules: [],
   preferredLang: 'en-US,en,*;q=0.5',
