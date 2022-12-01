@@ -16,15 +16,13 @@ const t = translator('options');
 const prepopulate = (config) => { // Convert config -> form
   const {...form} = config;
 
-  ['targetReferrers'].forEach(k => {
-    if (form[k].length === 0) {
-      form[k].push(''); // initial blank input
-    }
-    form[k] = form[k].reduce(
-      (acc, item, idx) => ({...acc, [idx]: item}),
-      {}
-    );
-  });
+  if (form['targetReferrers'].length === 0) {
+    form['targetReferrers'].push(''); // initial blank input
+  }
+  form['targetReferrers'] = form['targetReferrers'].reduce(
+    (acc, item, idx) => ({...acc, [idx]: item}),
+    {}
+  );
 
   if (form['domainRules'].length === 0) {
     form['domainRules'].push(new DomainRule());
