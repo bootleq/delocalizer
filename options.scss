@@ -28,6 +28,9 @@ fieldset {
   font-size: 1.4rem;
   line-height: 1.5;
 
+  padding-block: 0.35em 0.625em;
+  padding-inline: 0.75em;
+
   &:not(last-child) {
     margin-bottom: 1.5em;
   }
@@ -184,7 +187,6 @@ code {
   font-size: 1.3rem;
   text-align: right;
   margin: 0;
-  padding-bottom: 0;
   border: none;
 
   .status-msg {
@@ -215,6 +217,10 @@ code {
 }
 
 #domain-rules {
+  margin-bottom: 1em;
+}
+
+#domain-rules table {
   width: 100%;
   min-width: 550px;
   border-collapse: collapse;
@@ -270,10 +276,19 @@ code {
   }
 }
 
-#details {
+fieldset#details {
+  padding-inline: 0;
+  margin-inline: 0.75em;
+  border-style: solid;
+  border-color: white;
+
   input[type='text'] {
     padding: 2px 5px;
     margin-left: 4px;
     font-family: var(--font-code);
+  }
+
+  .domain-names {
+    width: clamp(20em, 70%, 40em);
   }
 }

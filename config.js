@@ -5,7 +5,7 @@ import browser from "webextension-polyfill";
 
 const defaults = {
   targetReferrersAny: 'no',
-  targetReferrers: ['www.google.com'],
+  targetReferrers: ['google.com'],
   domainRules: [],
   preferredLang: 'en-US,en,*;q=0.5',
   showBadge: 'yes',

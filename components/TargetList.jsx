@@ -118,8 +118,8 @@ const TargetList = props => {
 
   return (
     form &&
-    <fieldset disabled={busy}>
-      <legend>{slots.legend}</legend>
+    <div className='domain-names' disabled={busy}>
+      {slots.legend}
       <label>
         <input type='radio' name={configNameAny} value='yes' checked={form[configNameAny] === 'yes'} onChange={onRadioChange} />
         {slots.labelAnyHTML ? <span dangerouslySetInnerHTML={slots.labelAnyHTML} /> : slots.labelAny}
@@ -147,7 +147,7 @@ const TargetList = props => {
                onClick={buildOnOptionListAdd(configName)}
                disabled={form[configNameAny] !== 'no'}  />
       </div>
-    </fieldset>
+    </div>
   );
 };
 

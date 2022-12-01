@@ -20,7 +20,7 @@
     "description": "General exception, error message will also be shown after it"
   },
   "error_pathWildMatch": {
-    "message": "Path finding doesn't allow convert from * to '' (empty string) locale"
+    "message": "Path finding doesn't allow convert from * to '' (empty string) locale",
     "description": "Form validation error in options page, path type rule rejects locale from * to '' (emtpy string), to avoid too generic match"
   },
   "flash_executed": {
@@ -81,7 +81,7 @@
     "message": "Any sites"
   },
   "options_targetReferrerHint": {
-    "message": "Input <code>hostname</code>, e.g., <code>www.google.com</code>"
+    "message": "Input domain name, e.g., <code>google.com</code>"
   },
 
   "popup_toggleAutoTrigger": {

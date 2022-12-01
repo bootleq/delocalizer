@@ -56,7 +56,7 @@ const serialize = (form) => { // Convert form -> config
 const validate = ($form) => {
   let valid = true;
 
-  const $rules = Array.from($form.querySelectorAll('#domain-rules > tbody > tr'));
+  const $rules = Array.from($form.querySelectorAll('#domain-rules tbody > tr'));
   $rules.forEach(tr => {
     const $inputs = ['position', 'fromLocale', 'toLocale'].reduce((acc, k) => ({...acc, [k]: tr.querySelector(`[name$='.${k}']`)}), {});
     $inputs.toLocale.setCustomValidity('');
@@ -142,20 +142,23 @@ const Form = () => {
         <ImportExport setBusy={setBusy} setMsg={setMsg} reloadConfig={reloadConfig}  />
       </fieldset>
 
-      <h1>{t('_headerTriggerWhen')}</h1>
+      {/* <h1>{t('_headerTriggerWhen')}</h1> */}
 
-      <TargetReferrers {...commonListProps}></TargetReferrers>
+      {/* <h1>自動轉換設定</h1> */}
 
-      <h1>自動轉換</h1>
-
-      <fieldset>
-        <legend>個別網站設定</legend>
+      <fieldset id='domain-rules'>
+        <legend>個別網站的自動轉換</legend>
         <DomainRules {...commonListProps}></DomainRules>
       </fieldset>
 
-      <h1>{t('_headerDetails')}</h1>
+
+      {/* <h1>{t('_headerDetails')}</h1> */}
 
       <fieldset id='details' disabled={busy}>
+        <TargetReferrers {...commonListProps}></TargetReferrers>
+
+        <hr />
+
         <label>
           {t('_showTransformedCount')}
           <input type='checkbox' className='toggle' name='showBadge' checked={form.showBadge === 'yes'} onChange={onCheckSwitch} />

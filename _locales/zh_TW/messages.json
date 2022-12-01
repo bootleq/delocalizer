@@ -59,19 +59,19 @@
     "message": "刪除"
   },
   "options_listBelow": {
-    "message": "僅以下："
+    "message": "下列"
   },
   "options_addNew": {
     "message": "新增"
   },
   "options_targetReferrer": {
-    "message": "點開連結前的網站（Referrer）"
+    "message": "從特定網站（Referrer）點開連結時，才自動轉換："
   },
   "options_targetReferrerAny": {
-    "message": "所有網站"
+    "message": "不限制"
   },
   "options_targetReferrerHint": {
-    "message": "輸入 <code>hostname</code>，例如 <code>www.google.com</code>"
+    "message": "輸入網域名稱，例如 <code>google.com</code>"
   },
 
   "popup_toggleAutoTrigger": {

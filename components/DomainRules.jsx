@@ -88,7 +88,7 @@ const DomainRules = props => {
 
   return (
     <>
-      <table id='domain-rules'>
+      <table>
         <thead>
           <tr>
             <th>網域</th>
