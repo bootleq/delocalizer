@@ -3,7 +3,7 @@
 import browser from 'webextension-polyfill';
 
 import { load as loadConfig, save as saveConfig, withDefaults } from './config';
-import URLLocalePatterns from './URLLocalePatterns';
+import { setup as setDNRRules } from './dnr';
 import DomainRule, { match as matchRule, replaceMatchedSegment } from './DomainRule';
 
 // Basic flow:
@@ -138,6 +138,8 @@ function onStorageChange(changes) {
 
   config = {...config, ...withDefaults(newConfig, Object.keys(changes))};
   updateActionIcon();
+  setDNRRules(config);
+
   mutatedRequests.clear();
 }
 
@@ -213,6 +215,7 @@ function onInstalled() {
 
 loadConfig().then(c => {
   config = c;
+  setDNRRules(config);
   updateActionIcon();
 });
 

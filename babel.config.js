@@ -25,5 +25,11 @@ module.exports = api => {
     ["ramda", {"useES": true}]
   ];
 
-  return { presets, plugins };
+  const env = {
+    test: {
+      plugins: ['ramda']
+    }
+  };
+
+  return { presets, plugins, env };
 };
