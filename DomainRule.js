@@ -1,8 +1,8 @@
 'use strict';
 
 const generalLocalePattern = new RegExp([
-  /(?:[a-zA-Z]{2})/,  // en
-  /(?:[\-_]\w{4})?/,  // -US or _US (optional) or even -hant
+  /(?:[a-zA-Z]{2})/,    // en
+  /(?:[\-_]\w{2,4})?/,  // -US or _US (optional) or even -hant
 ].map(r => r.source).join(''));
 
 class DomainRule {
