@@ -114,12 +114,12 @@ function onErrorOccurred({ requestId }) {
 function onCompleted({ requestId }) {
   if (config.showBadge === 'yes' && mutatedRequests.has(requestId)) {
     mutatedRequests.delete(requestId);
-    browser.browserAction.getBadgeText({}).then(t => {
+    browser.action.getBadgeText({}).then(t => {
       let num = Number.parseInt(t, 10);
       if (Number.isNaN(num)) {
         num = 0;
       }
-      browser.browserAction.setBadgeText({text: `${num + 1}`});
+      browser.action.setBadgeText({text: `${num + 1}`});
     });
   }
 }
@@ -172,7 +172,7 @@ async function doToggle(sendResponse) {
 
 async function doClearBadge(sendResponse) {
   mutatedRequestCount = 0;
-  browser.browserAction.setBadgeText({text: ''});
+  browser.action.setBadgeText({text: ''});
   sendResponse();
 }
 // }}}
@@ -199,11 +199,11 @@ function onMessage(message, sender, sendResponse) {
 
 function updateActionIcon() {
   const iconPath = config.suspended === 'yes' ? 'icons/outline-128.png' : 'icons/128.png';
-  browser.browserAction.setIcon({path: iconPath});
+  browser.action.setIcon({path: iconPath});
 
   if (config.showBadge === 'no') {
     mutatedRequestCount = 0;
-    browser.browserAction.setBadgeText({text: ''});
+    browser.action.setBadgeText({text: ''});
   }
 }
 
@@ -216,13 +216,13 @@ loadConfig().then(c => {
   updateActionIcon();
 });
 
-browser.webRequest.onBeforeRequest.addListener(onBeforeRequest, filter, ['blocking']);
-browser.webRequest.onBeforeSendHeaders.addListener(onBeforeSendHeaders, filter, ['blocking', 'requestHeaders']);
-browser.webRequest.onErrorOccurred.addListener(onErrorOccurred, filter);
-browser.webRequest.onCompleted.addListener(onCompleted, filter);
+// browser.webRequest.onBeforeRequest.addListener(onBeforeRequest, filter, ['blocking']);
+// browser.webRequest.onBeforeSendHeaders.addListener(onBeforeSendHeaders, filter, ['blocking', 'requestHeaders']);
+// browser.webRequest.onErrorOccurred.addListener(onErrorOccurred, filter);
+// browser.webRequest.onCompleted.addListener(onCompleted, filter);
 browser.storage.onChanged.addListener(onStorageChange);
 
-browser.browserAction.setBadgeBackgroundColor({color: '#444'});
+browser.action.setBadgeBackgroundColor({color: '#444'});
 browser.runtime.onMessage.addListener(onMessage);
 
 browser.runtime.onInstalled.addListener(onInstalled);
