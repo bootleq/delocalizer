@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { assocPath, dissocPath } from 'ramda';
+import { assocPath } from 'ramda';
 
 import { isBlank, translator } from '../utils';
 import DomainRule from '../DomainRule';
@@ -46,7 +46,7 @@ const Rules = (props) => {
         <input type='text' name={`domainRules.${key}.toLocale`} value={r.toLocale} onChange={onChange} />
       </td>
       <td><input type='checkbox' className='toggle' name={`domainRules.${key}.enabled`} checked={r.enabled === 'yes'} onChange={onChange} /></td>
-      <td><input className='more-actions' type='button' value='⋯' onClick={onOpenMenu} /></td>
+      <td><input className='more-actions' data-key={key} type='button' value='⋯' onClick={onOpenMenu} /></td>
     </tr>
   ));
 };
@@ -108,7 +108,7 @@ const DomainRules = props => {
         </tbody>
       </table>
 
-      <Menu ref={menuRef} anchor={menuAnchor} open={menuOpen} setMenuOpen={setMenuOpen} />
+      <Menu ref={menuRef} anchor={menuAnchor} open={menuOpen} setMenuOpen={setMenuOpen} setForm={setForm} />
 
       <input className='add' type='button' value={t('_addNew')}
              onClick={onAdd} disabled={busy} />

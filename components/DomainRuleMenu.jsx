@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect, useRef, forwardRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useFloating } from '@floating-ui/react-dom';
+import { dissocPath } from 'ramda';
 
 import { translator } from '../utils';
 
@@ -13,7 +14,7 @@ const loopWithin = (currentIndex, size, direction) => {
   return next;
 };
 
-const DomainRuleMenu = forwardRef(({open, anchor, setMenuOpen}, ref) => {
+const DomainRuleMenu = forwardRef(({open, anchor, setMenuOpen, setForm}, ref) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsCountRef = useRef(0);
 
@@ -45,9 +46,11 @@ const DomainRuleMenu = forwardRef(({open, anchor, setMenuOpen}, ref) => {
   }, [ref.current]);
 
   function onDelete(e) {
-    const $e = e.target;
-    let { name } = $e;
-    // setForm(prev => dissocPath(name.split('.'), prev));
+    if (globalThis.confirm('Are you sure?')) {
+      const key = anchor.dataset.key;
+      setForm(dissocPath(['domainRules', key]));
+      setMenuOpen(false);
+    }
   }
 
   function onMove(e) {
@@ -95,8 +98,8 @@ const DomainRuleMenu = forwardRef(({open, anchor, setMenuOpen}, ref) => {
       <div className='backdrop' aria-hidden onClick={onClose} onKeyDown={onKeyDown} />
       <ul ref={floating} className='more-menu' style={menuStyles} aria-label='rule operations' onKeyDown={onKeyDown} >
         <li tabIndex='-1' onClick={onDelete}>{t('_delete')}</li>
-        <li tabIndex='-1' onClick={onMove}>上移</li>
-        <li tabIndex='-1' onClick={onMove}>下移</li>
+        <li tabIndex='-1' data-direction='up' onClick={onMove}>上移</li>
+        <li tabIndex='-1' data-direction='down' onClick={onMove}>下移</li>
       </ul>
     </>
   );
