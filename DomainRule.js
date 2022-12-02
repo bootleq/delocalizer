@@ -12,6 +12,8 @@ class DomainRule {
     this.domain     = config?.domain     ?? '';
     this.toLocale   = config?.toLocale   ?? '';     // leave blank for auto detection
     this.enabled    = config?.enabled    ?? 'yes';
+
+    this.key = null; // for options UI only, not persistent
   }
 }
 

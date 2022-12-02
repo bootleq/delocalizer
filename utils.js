@@ -1,6 +1,7 @@
 'use strict';
 
 import browser from 'webextension-polyfill';
+import { over, lensPath } from 'ramda';
 
 function isBlank(v) {
   const type = typeof v;
@@ -26,6 +27,10 @@ function slice(o, keys) {
   );
 }
 
+function updatePath(path, fn) {
+  return over(lensPath(path), fn);
+}
+
 function translator(prefix) {
   return (k, ...args) => {
     let key = k;
@@ -44,4 +49,4 @@ async function getBrowserInfo() {
   return {name: 'chrome'}; // return dummy object for chrome is enough
 }
 
-export { isBlank, slice, translator, getBrowserInfo };
+export { isBlank, slice, translator, updatePath, getBrowserInfo };

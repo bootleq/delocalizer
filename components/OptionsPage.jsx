@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { map as RMap, trim as RTrim } from 'ramda';
+import { map, trim, dissoc } from 'ramda';
 import classNames from 'classnames';
 
 import { load as loadConfig, save as saveConfig } from '../config';
@@ -28,8 +28,8 @@ const prepopulate = (config) => { // Convert config -> form
     form['domainRules'].push(new DomainRule());
   }
   form['domainRules'] = form['domainRules'].reduce(
-    (acc, item, idx) => ({...acc, [idx]: item}),
-    {}
+    (acc, item, idx) => ([...acc, {...item, key: idx}]),
+    []
   );
 
   return form;
@@ -45,9 +45,9 @@ const serialize = (form) => { // Convert form -> config
                   .map(a => a[1].trim());
   });
 
-  config['domainRules'] = Object.entries(config['domainRules'])
-                            .sort(a => a[0])
-                            .map(a => RMap(RTrim, a[1]));
+  config['domainRules'] = config['domainRules']
+                            .map(dissoc('key'))
+                            .map(map(trim));
 
   return config;
 };

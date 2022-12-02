@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useLayoutEffect, useRef, forwardRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useFloating } from '@floating-ui/react-dom';
-import { dissocPath } from 'ramda';
+import { dissocPath, over, lensProp, reject, propEq } from 'ramda';
 
-import { translator } from '../utils';
+import { translator, updatePath } from '../utils';
 
 const t = translator('options');
 
@@ -47,8 +47,11 @@ const DomainRuleMenu = forwardRef(({open, anchor, setMenuOpen, setForm}, ref) =>
 
   function onDelete(e) {
     if (globalThis.confirm('Are you sure?')) {
-      const key = anchor.dataset.key;
-      setForm(dissocPath(['domainRules', key]));
+      const key = Number.parseInt(anchor.dataset.key, 10);
+      setForm(updatePath(
+        ['domainRules'],
+        reject(propEq('key', key))
+      ));
       setMenuOpen(false);
     }
   }

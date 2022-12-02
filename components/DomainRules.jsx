@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { assocPath } from 'ramda';
+import { when, map, prop, propEq, assoc, append } from 'ramda';
 
-import { isBlank, translator } from '../utils';
+import { isBlank, translator, updatePath } from '../utils';
 import DomainRule from '../DomainRule';
 import Menu from './DomainRuleMenu';
 
@@ -11,7 +11,7 @@ const t = translator('options');
 const RulePositionOptions = ({rule, ruleKey, onChange}) => {
   const options = [{value: 'sub.', label: '子網域'}, {value: '/path', label: '路徑'}];
   return (
-    <select name={`domainRules.${ruleKey}.position`} value={rule.position} onChange={onChange}>
+    <select name={`${ruleKey}.position`} value={rule.position} onChange={onChange}>
       {options.map(({value, label}) => (
         <option value={value} key={value}>{label}</option>
       ))}
@@ -25,10 +25,18 @@ const Rules = (props) => {
   function onChange(e) {
     const $e = e.target;
     let { name, value } = $e;
+    const [ruleKey, prop] = name.split('.')
+
     if ($e.type === 'checkbox') {
       value = $e.checked ? 'yes' : 'no';
     }
-    setForm(prev => assocPath(name.split('.'), value, prev));
+    setForm(updatePath(
+      ['domainRules'],
+      map(when(
+        propEq('key', Number.parseInt(ruleKey, 10)),
+        assoc(prop, value)
+      ))
+    ));
   }
 
   function onOpenMenu(e) {
@@ -38,14 +46,14 @@ const Rules = (props) => {
 
   return Object.entries(items).map(([key, r]) => (
     <tr key={key}>
-      <td><input type='text' name={`domainRules.${key}.domain`} value={r.domain} onChange={onChange} required /></td>
+      <td><input type='text' name={`${key}.domain`} value={r.domain} onChange={onChange} required /></td>
       <td><RulePositionOptions rule={r} ruleKey={key} onChange={onChange} /></td>
       <td className='locale-dir'>
-        <input type='text' name={`domainRules.${key}.fromLocale`} value={r.fromLocale} onChange={onChange} required />
+        <input type='text' name={`${key}.fromLocale`} value={r.fromLocale} onChange={onChange} required />
         <span>→</span>
-        <input type='text' name={`domainRules.${key}.toLocale`} value={r.toLocale} onChange={onChange} />
+        <input type='text' name={`${key}.toLocale`} value={r.toLocale} onChange={onChange} />
       </td>
-      <td><input type='checkbox' className='toggle' name={`domainRules.${key}.enabled`} checked={r.enabled === 'yes'} onChange={onChange} /></td>
+      <td><input type='checkbox' className='toggle' name={`${key}.enabled`} checked={r.enabled === 'yes'} onChange={onChange} /></td>
       <td><input className='more-actions' data-key={key} type='button' value='⋯' onClick={onOpenMenu} /></td>
     </tr>
   ));
@@ -69,10 +77,10 @@ const DomainRules = props => {
 
   useEffect(() => {
     if (form.domainRules) {
-      const keys = Object.keys(form.domainRules);
+      const keys = form.domainRules.map(prop('key'));
       maxKey.current = Math.max(...keys.map(k => Number.parseInt(k, 10)));
     }
-  }, [form.domainRules && Object.keys(form.domainRules)]);
+  }, [form.domainRules]);
 
   useEffect(() => {
     if (adding) {
@@ -86,7 +94,10 @@ const DomainRules = props => {
     const newKey = nextKey();
 
     setAdding(true);
-    setForm(prev => assocPath(['domainRules', newKey], newItem, prev));
+    setForm(updatePath(
+      ['domainRules'],
+      append({...newItem, key: newKey})
+    ));
   }
 
   return (
