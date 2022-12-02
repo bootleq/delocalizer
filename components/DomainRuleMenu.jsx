@@ -18,7 +18,7 @@ const DomainRuleMenu = forwardRef(({open, anchor, setMenuOpen, form, setForm}, r
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsCountRef = useRef(0);
 
-  const {x, y, reference, floating, strategy, refs} = useFloating({placement: 'left'});
+  const {x, y, reference, floating, strategy, refs} = useFloating({placement: 'left-start'});
   const menuStyles={
     position: strategy,
     top: y ?? 0,
