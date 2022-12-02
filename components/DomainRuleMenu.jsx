@@ -46,14 +46,12 @@ const DomainRuleMenu = forwardRef(({open, anchor, setMenuOpen, form, setForm}, r
   }, [ref.current]);
 
   function onDelete(e) {
-    if (globalThis.confirm('Are you sure?')) {
-      const key = Number.parseInt(anchor.dataset.key, 10);
-      setForm(updatePath(
-        ['domainRules'],
-        reject(propEq('key', key))
-      ));
-      setMenuOpen(false);
-    }
+    const key = Number.parseInt(anchor.dataset.key, 10);
+    setForm(updatePath(
+      ['domainRules'],
+      reject(propEq('key', key))
+    ));
+    setMenuOpen(false);
   }
 
   function onMove(e) {
