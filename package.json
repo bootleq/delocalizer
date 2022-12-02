@@ -3,6 +3,7 @@
   "description": "Prevent locale being auto switch by website",
   "private": true,
   "dependencies": {
+    "@floating-ui/react-dom": "^1.0.1",
     "classnames": "^2.3.2",
     "escape-string-regexp": "^5.0.0",
     "ramda": "^0.28.0",
