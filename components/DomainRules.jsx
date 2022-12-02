@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { when, map, prop, propEq, assoc, append } from 'ramda';
+import classNames from 'classnames';
 
 import { isBlank, translator, updatePath } from '../utils';
 import DomainRule from '../DomainRule';
@@ -20,7 +21,9 @@ const RulePositionOptions = ({rule, ruleKey, onChange}) => {
 };
 
 const Rules = (props) => {
-  const { form, setForm, disabled, items, setMenuOpen, setMenuAnchor } = props;
+  const { form, setForm, disabled, items, menuOpen, setMenuOpen, menuAnchor, setMenuAnchor } = props;
+
+  const [anchoredKey, setAnchoredKey] = useState();
 
   function onChange(e) {
     const $e = e.target;
@@ -41,11 +44,12 @@ const Rules = (props) => {
 
   function onOpenMenu(e) {
     setMenuAnchor(e.target);
+    setAnchoredKey(e.target.dataset.key);
     setMenuOpen(true);
   }
 
   return items.map(r => (
-    <tr key={r.key}>
+    <tr key={r.key} className={classNames(menuOpen && Number.parseInt(anchoredKey, 10) === r.key ? 'anchored' : null)}>
       <td><input type='text' name={`${r.key}.domain`} value={r.domain} onChange={onChange} required /></td>
       <td><RulePositionOptions rule={r} ruleKey={r.key} onChange={onChange} /></td>
       <td className='locale-dir'>
@@ -114,12 +118,14 @@ const DomainRules = props => {
         </thead>
         <tbody ref={listRef}>
           {!isBlank(form) &&
-            <Rules form={form} setForm={setForm} setMenuOpen={setMenuOpen} setMenuAnchor={setMenuAnchor} items={form.domainRules} disabled={busy} />
+            <Rules form={form} setForm={setForm}
+                   {...{ menuOpen, setMenuOpen, menuAnchor, setMenuAnchor }}
+                   items={form.domainRules} disabled={busy} />
           }
         </tbody>
       </table>
 
-      <Menu ref={menuRef} anchor={menuAnchor} open={menuOpen} setMenuOpen={setMenuOpen} setForm={setForm} />
+      <Menu ref={menuRef} anchor={menuAnchor} open={menuOpen} setMenuOpen={setMenuOpen} form={form} setForm={setForm} />
 
       <input className='add' type='button' value={t('_addNew')}
              onClick={onAdd} disabled={busy} />

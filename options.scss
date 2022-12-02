@@ -235,6 +235,9 @@ code {
   tbody tr:nth-child(2n) {
     background-color: #f2f2f2;
   }
+  tbody tr.anchored {
+    background-color: rgba(0,0,0,0.5);
+  }
   th {
     background-color: #efeff2;
     font-weight: normal;
@@ -251,7 +254,7 @@ code {
   th, td {
     min-width: 4em;
     text-align: center;
-    padding: 2px 0;
+    padding: 2px 0 3px;
 
     input[type='text'] {
       width: 4em;
