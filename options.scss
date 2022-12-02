@@ -146,12 +146,6 @@ li {
     background-color: #ededed;
     outline: 2px solid #efefef;
   }
-
-  &:first-child {
-    input[type='button'] {
-      visibility: hidden;
-    }
-  }
 }
 
 .hint-and-add {
@@ -285,6 +279,53 @@ code {
   }
   input.toggle[type='checkbox'] {
     margin: 0;
+  }
+
+  .more-actions {
+    width: 100%;
+    height: 24px;
+    border: none;
+    border-radius: 5px;
+    background-color: transparent;
+    font-weight: bold;
+
+    &:hover {
+      background-color: #ccc;
+    }
+  }
+}
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.more-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: max-content;
+  padding: 2px;
+  background-color: white;
+  box-shadow: -1px -1px 3px rgba(0,0,0,0.3), 2px 2px 6px rgba(0,0,0,0.4);
+  border-radius: 3px;
+
+  li {
+    padding: 4px 1em;
+    display: block;
+    font-size: 1.2rem;
+    cursor: pointer;
+
+    &:not(:last-child) {
+      border-bottom: 1px dotted #ccc;
+    }
+
+    &:focus {
+      background-color: #ccc;
+    }
   }
 }
 

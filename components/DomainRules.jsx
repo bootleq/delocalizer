@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { assocPath, dissocPath } from 'ramda';
 
 import { isBlank, translator } from '../utils';
 import DomainRule from '../DomainRule';
+import Menu from './DomainRuleMenu';
 
 const t = translator('options');
 
@@ -18,7 +20,7 @@ const RulePositionOptions = ({rule, ruleKey, onChange}) => {
 };
 
 const Rules = (props) => {
-  const { form, setForm, disabled, items } = props;
+  const { form, setForm, disabled, items, setMenuOpen, setMenuAnchor } = props;
 
   function onChange(e) {
     const $e = e.target;
@@ -29,10 +31,9 @@ const Rules = (props) => {
     setForm(prev => assocPath(name.split('.'), value, prev));
   }
 
-  function onDelete(e) {
-    const $e = e.target;
-    let { name } = $e;
-    setForm(prev => dissocPath(name.split('.'), prev));
+  function onOpenMenu(e) {
+    setMenuAnchor(e.target);
+    setMenuOpen(true);
   }
 
   return Object.entries(items).map(([key, r]) => (
@@ -45,17 +46,17 @@ const Rules = (props) => {
         <input type='text' name={`domainRules.${key}.toLocale`} value={r.toLocale} onChange={onChange} />
       </td>
       <td><input type='checkbox' className='toggle' name={`domainRules.${key}.enabled`} checked={r.enabled === 'yes'} onChange={onChange} /></td>
-      <td>
-        <input type='button' value={t('_delete')} name={`domainRules.${key}`} onClick={onDelete} />
-      </td>
+      <td><input className='more-actions' type='button' value='⋯' onClick={onOpenMenu} /></td>
     </tr>
   ));
 };
+
 
 const DomainRules = props => {
   const { form, setForm, busy } = props;
 
   const listRef = useRef();
+  const menuRef = useRef();
 
   const maxKey = useRef(0);
   const nextKey = () => {
@@ -63,6 +64,8 @@ const DomainRules = props => {
   }
 
   const [adding, setAdding] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuAnchor, setMenuAnchor] = useState(null);
 
   useEffect(() => {
     if (form.domainRules) {
@@ -100,10 +103,13 @@ const DomainRules = props => {
         </thead>
         <tbody ref={listRef}>
           {!isBlank(form) &&
-            <Rules form={form} setForm={setForm} items={form.domainRules} disabled={busy} />
+            <Rules form={form} setForm={setForm} setMenuOpen={setMenuOpen} setMenuAnchor={setMenuAnchor} items={form.domainRules} disabled={busy} />
           }
         </tbody>
       </table>
+
+      <Menu ref={menuRef} anchor={menuAnchor} open={menuOpen} setMenuOpen={setMenuOpen} />
+
       <input className='add' type='button' value={t('_addNew')}
              onClick={onAdd} disabled={busy} />
     </>
