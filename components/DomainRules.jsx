@@ -44,17 +44,17 @@ const Rules = (props) => {
     setMenuOpen(true);
   }
 
-  return Object.entries(items).map(([key, r]) => (
-    <tr key={key}>
-      <td><input type='text' name={`${key}.domain`} value={r.domain} onChange={onChange} required /></td>
-      <td><RulePositionOptions rule={r} ruleKey={key} onChange={onChange} /></td>
+  return items.map(r => (
+    <tr key={r.key}>
+      <td><input type='text' name={`${r.key}.domain`} value={r.domain} onChange={onChange} required /></td>
+      <td><RulePositionOptions rule={r} ruleKey={r.key} onChange={onChange} /></td>
       <td className='locale-dir'>
-        <input type='text' name={`${key}.fromLocale`} value={r.fromLocale} onChange={onChange} required />
+        <input type='text' name={`${r.key}.fromLocale`} value={r.fromLocale} onChange={onChange} required />
         <span>→</span>
-        <input type='text' name={`${key}.toLocale`} value={r.toLocale} onChange={onChange} />
+        <input type='text' name={`${r.key}.toLocale`} value={r.toLocale} onChange={onChange} />
       </td>
-      <td><input type='checkbox' className='toggle' name={`${key}.enabled`} checked={r.enabled === 'yes'} onChange={onChange} /></td>
-      <td><input className='more-actions' data-key={key} type='button' value='⋯' onClick={onOpenMenu} /></td>
+      <td><input type='checkbox' className='toggle' name={`${r.key}.enabled`} checked={r.enabled === 'yes'} onChange={onChange} /></td>
+      <td><input className='more-actions' data-key={r.key} type='button' value='⋯' onClick={onOpenMenu} /></td>
     </tr>
   ));
 };

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect, useRef, forwardRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useFloating } from '@floating-ui/react-dom';
-import { dissocPath, over, lensProp, reject, propEq } from 'ramda';
+import { dissocPath, over, lensProp, reject, propEq, move } from 'ramda';
 
 import { translator, updatePath } from '../utils';
 
@@ -14,7 +14,7 @@ const loopWithin = (currentIndex, size, direction) => {
   return next;
 };
 
-const DomainRuleMenu = forwardRef(({open, anchor, setMenuOpen, setForm}, ref) => {
+const DomainRuleMenu = forwardRef(({open, anchor, setMenuOpen, form, setForm}, ref) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsCountRef = useRef(0);
 
@@ -57,10 +57,23 @@ const DomainRuleMenu = forwardRef(({open, anchor, setMenuOpen, setForm}, ref) =>
   }
 
   function onMove(e) {
-    const $e = e.target;
-    let { name } = $e;
-    console.log('onMove', name);
-    // setForm(prev => dissocPath(name.split('.'), prev));
+    const dir = e.target.dataset.direction === 'down' ? 1 : -1;
+    const key = Number.parseInt(anchor.dataset.key, 10);
+    const index = form.domainRules.findIndex(propEq('key', key));
+    const size = form.domainRules.length;
+    let fromTo = [index, index + dir];
+
+    if (dir === 1 && index === (size - 1)) {
+      fromTo = [-1, 0];
+    } else if (dir === -1 && index === 0) {
+      fromTo = [0, size - 1];
+    }
+
+    setForm(updatePath(
+      ['domainRules'],
+      move(...fromTo)
+    ));
+    setMenuOpen(false);
   }
 
   function onClose() {
