@@ -92,14 +92,14 @@ async function setup(config) {
   if (oldRules.length) return;
 
   const newRules = flatMap(r => fromDomainRule(r, config), config.domainRules);
-  const commonProps = {};
 
-  if (config.targetReferrersAny === 'no' && config.targetReferrers.length) {
-    commonProps['initiatorDomains'] = config.targetReferrers;
-  }
+  const initiatorDomains = (config.targetReferrersAny === 'no' && config.targetReferrers.length) ? config.targetReferrers : null;
 
   newRules.forEach((rule, index) => {
-    Object.assign(rule, commonProps, {id: index + 1});
+    if (initiatorDomains) {
+      rule['condition']['initiatorDomains'] = initiatorDomains;
+    }
+    rule['id'] = index + 1;
   });
 
   try {
