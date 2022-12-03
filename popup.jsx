@@ -70,6 +70,10 @@ const Main = () => {
     browser.runtime.openOptionsPage();
   };
 
+  if (!suspended) {
+    return;
+  }
+
   return (
     <>
       <ul>
