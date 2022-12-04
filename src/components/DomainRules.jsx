@@ -8,11 +8,15 @@ import Menu from './DomainRuleMenu';
 
 const t = translator('options');
 
+const rulePositionOptions = [
+  {value: 'sub.', label: t('_rulesPosSubdomain')},
+  {value: '/path', label: t('_rulesPosPath')}
+];
+
 const RulePositionOptions = ({rule, ruleKey, onChange}) => {
-  const options = [{value: 'sub.', label: '子網域'}, {value: '/path', label: '路徑'}];
   return (
     <select name={`${ruleKey}.position`} value={rule.position} onChange={onChange}>
-      {options.map(({value, label}) => (
+      {rulePositionOptions.map(({value, label}) => (
         <option value={value} key={value}>{label}</option>
       ))}
     </select>
@@ -138,10 +142,10 @@ const DomainRules = props => {
       <table>
         <thead>
           <tr>
-            <th>網域</th>
-            <th>尋找</th>
-            <th>轉換語言</th>
-            <th>啟用</th>
+            <th>{t('_rulesThDomain')}</th>
+            <th>{t('_rulesThFind')}</th>
+            <th>{t('_rulesThLocales')}</th>
+            <th>{t('_rulesThEnabled')}</th>
             <th></th>
           </tr>
         </thead>

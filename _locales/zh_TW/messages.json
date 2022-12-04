@@ -34,18 +34,41 @@
   "options_save": {
     "message": "儲存"
   },
+  "options_import": {
+    "message": "匯入"
+  },
+  "options_export": {
+    "message": "匯出"
+  },
   "options_imported": {
     "message": "匯入成功（記得存檔才會生效）"
   },
   "options_invalidImport": {
     "message": "匯入檔案內容不正確"
   },
-  "options_headerTriggerWhen": {
-    "message": "滿足以下條件才轉換"
+
+  "options_domainRulesHeader": {
+    "message": "個別網站的自動轉換"
   },
-  "options_headerDetails": {
-    "message": "細部設定"
+  "options_rulesThDomain": {
+    "message": "網域"
   },
+  "options_rulesThFind": {
+    "message": "尋找"
+  },
+  "options_rulesThLocales": {
+    "message": "轉換語言"
+  },
+  "options_rulesThEnabled": {
+    "message": "啟用"
+  },
+  "options_rulesPosSubdomain": {
+    "message": "子網域"
+  },
+  "options_rulesPosPath": {
+    "message": "路徑"
+  },
+
   "options_showTransformedCount": {
     "message": "在工具列按鈕上顯示自動轉換計數"
   },
@@ -57,6 +80,12 @@
   },
   "options_delete": {
     "message": "刪除"
+  },
+  "options_moveUp": {
+    "message": "上移"
+  },
+  "options_moveDown": {
+    "message": "下移"
   },
   "options_listBelow": {
     "message": "下列"

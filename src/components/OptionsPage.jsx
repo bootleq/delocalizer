@@ -142,17 +142,11 @@ const Form = () => {
         <ImportExport setBusy={setBusy} setMsg={setMsg} resetConfig={resetFormFromConfig}  />
       </fieldset>
 
-      {/* <h1>{t('_headerTriggerWhen')}</h1> */}
-
-      {/* <h1>自動轉換設定</h1> */}
-
       <fieldset id='domain-rules'>
-        <legend>個別網站的自動轉換</legend>
+        <legend>{t('_domainRulesHeader')}</legend>
         <DomainRules {...commonListProps}></DomainRules>
       </fieldset>
 
-
-      {/* <h1>{t('_headerDetails')}</h1> */}
 
       <fieldset id='details' disabled={busy}>
         <TargetReferrers {...commonListProps}></TargetReferrers>

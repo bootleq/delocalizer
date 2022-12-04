@@ -42,20 +42,41 @@
   "options_save": {
     "message": "Save"
   },
+  "options_import": {
+    "message": "Import"
+  },
+  "options_export": {
+    "message": "Export"
+  },
   "options_imported": {
     "message": "Import successed"
   },
   "options_invalidImport": {
     "message": "Invalid import file content"
   },
-  "options_headerTriggerWhen": {
-    "message": "Do auto transform if",
-    "description": "Options page section header, when should we do auto translation"
+
+  "options_domainRulesHeader": {
+    "message": "Auto transformation by site"
   },
-  "options_headerDetails": {
-    "message": "Detail settings",
-    "description": "Options page section header, for detail items"
+  "options_rulesThDomain": {
+    "message": "Domain"
   },
+  "options_rulesThFind": {
+    "message": "Find"
+  },
+  "options_rulesThLocales": {
+    "message": "Locale Change"
+  },
+  "options_rulesThEnabled": {
+    "message": "Enabled"
+  },
+  "options_rulesPosSubdomain": {
+    "message": "sub-domain"
+  },
+  "options_rulesPosPath": {
+    "message": "path"
+  },
+
   "options_showTransformedCount": {
     "message": "Show count of auto transformation on toolbar button"
   },
@@ -67,6 +88,12 @@
   },
   "options_delete": {
     "message": "Delete"
+  },
+  "options_moveUp": {
+    "message": "Move up"
+  },
+  "options_moveDown": {
+    "message": "Move down"
   },
   "options_listBelow": {
     "message": "One of: "
