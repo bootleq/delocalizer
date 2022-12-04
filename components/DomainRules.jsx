@@ -26,8 +26,26 @@ const Rule = memo(props => {
     rule: {key, domain, fromLocale, toLocale, enabled}
   } = props;
 
+  const ref = useRef();
+  const anchoredRef = useRef(false);
+
+  useEffect(() => {
+    if (anchored) {
+      ref.current.classList?.add('anchored');
+      anchoredRef.current = true;
+    } else {
+      if (anchoredRef.current) {
+        ref.current.classList?.add('anchored'); // react remove the node (with its classes) when move item down, we has to add it back
+        setTimeout(() => {
+          ref.current.classList?.remove('anchored');
+          anchoredRef.current = false;
+        });
+      }
+    }
+  }, [anchored]);
+
   return (
-    <tr className={classNames(anchored ? 'anchored' : null)}>
+    <tr ref={ref}>
       <td><input type='text' name={`${key}.domain`} value={domain} onChange={onChange} required /></td>
       <td><RulePositionOptions rule={rule} ruleKey={key} onChange={onChange} /></td>
       <td className='locale-dir'>

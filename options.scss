@@ -235,8 +235,13 @@ code {
   tbody tr:nth-child(2n) {
     background-color: #f2f2f2;
   }
+  tbody tr {
+    transition: background-color 1s ease-in, outline 1s ease-in;
+  }
   tbody tr.anchored {
     background-color: rgba(0,0,0,0.5);
+    outline: 3px solid rgba(0,0,0,0.5);
+    transition-property: none;
   }
   th {
     background-color: #efeff2;
