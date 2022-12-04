@@ -19,9 +19,9 @@
     "message": "Error: ",
     "description": "General exception, error message will also be shown after it"
   },
-  "error_invalidHostPattern": {
-    "message": "Invalid reglur expression",
-    "description": "Form validation error in options page, host pattern invalid"
+  "error_pathWildMatch": {
+    "message": "Path finding doesn't allow convert from * to '' (empty string) locale",
+    "description": "Form validation error in options page, path type rule rejects locale from * to '' (emtpy string), to avoid too generic match"
   },
   "flash_executed": {
     "message": "Executed",
@@ -41,6 +41,12 @@
   },
   "options_save": {
     "message": "Save"
+  },
+  "options_imported": {
+    "message": "Import successed"
+  },
+  "options_invalidImport": {
+    "message": "Invalid import file content"
   },
   "options_headerTriggerWhen": {
     "message": "Do auto transform if",
@@ -68,15 +74,6 @@
   "options_addNew": {
     "message": "Add"
   },
-  "options_targetHost": {
-    "message": "Destination URLs"
-  },
-  "options_targetHostAny": {
-    "message": "Any URLs"
-  },
-  "options_targetHostHint": {
-    "message": "Skip <code>https://</code> part, example: <code>reactjs.org/docs</code>;<br /> Prefix with <code>/</code> to use regular expression, e.g., <code>/^(docs|msdn)\\.microsoft</code>"
-  },
   "options_targetReferrer": {
     "message": "Websites before click the link (Referrer)"
   },
@@ -84,16 +81,7 @@
     "message": "Any sites"
   },
   "options_targetReferrerHint": {
-    "message": "Input <code>hostname</code>, e.g., <code>www.google.com</code>"
-  },
-  "options_targetLocales": {
-    "message": "Destination URL's locale segment"
-  },
-  "options_targetLocalesAnyHTML": {
-    "message": "Any looks alike (e.g., <code>en</code> or <code>en-US</code>)"
-  },
-  "options_targetLocalesHint": {
-    "message": "Can omit <code>-XX</code> part within <code>xx-XX</code>, example: set <code>zh</code> can also include <code>zh-TW</code> and <code>zh_TW</code>"
+    "message": "Input domain name, e.g., <code>google.com</code>"
   },
 
   "popup_toggleAutoTrigger": {

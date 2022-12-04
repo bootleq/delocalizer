@@ -1,6 +1,7 @@
 'use strict';
 
 import browser from 'webextension-polyfill';
+import { over, lensPath } from 'ramda';
 
 function isBlank(v) {
   const type = typeof v;
@@ -26,6 +27,10 @@ function slice(o, keys) {
   );
 }
 
+function updatePath(path, fn) {
+  return over(lensPath(path), fn);
+}
+
 function translator(prefix) {
   return (k, ...args) => {
     let key = k;
@@ -34,6 +39,14 @@ function translator(prefix) {
     }
     return browser.i18n.getMessage(key, ...args);
   };
-};
+}
 
-export { isBlank, slice, translator };
+async function getBrowserInfo() {
+  if (browser.runtime.hasOwnProperty('getBrowserInfo')) {
+    return await browser.runtime.getBrowserInfo();
+  }
+
+  return {name: 'chrome'}; // return dummy object for chrome is enough
+}
+
+export { isBlank, slice, translator, updatePath, getBrowserInfo };

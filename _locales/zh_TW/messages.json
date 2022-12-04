@@ -15,8 +15,8 @@
   "error_otherError": {
     "message": "錯誤："
   },
-  "error_invalidHostPattern": {
-    "message": "正規表達式無法解析"
+  "error_pathWildMatch": {
+    "message": "尋找「路徑」的設定不接受從 * 轉換為任意語言（空字串）"
   },
   "flash_executed": {
     "message": "已執行"
@@ -33,6 +33,12 @@
   },
   "options_save": {
     "message": "儲存"
+  },
+  "options_imported": {
+    "message": "匯入成功（記得存檔才會生效）"
+  },
+  "options_invalidImport": {
+    "message": "匯入檔案內容不正確"
   },
   "options_headerTriggerWhen": {
     "message": "滿足以下條件才轉換"
@@ -53,37 +59,19 @@
     "message": "刪除"
   },
   "options_listBelow": {
-    "message": "僅以下："
+    "message": "下列"
   },
   "options_addNew": {
     "message": "新增"
   },
-  "options_targetHost": {
-    "message": "目的網址"
-  },
-  "options_targetHostAny": {
-    "message": "任何網址"
-  },
-  "options_targetHostHint": {
-    "message": "不要包含 <code>https://</code> 部份，範例：<code>reactjs.org/docs</code>；<br /> 以 <code>/</code> 開頭可使用正規表達式，例如 <code>/^(docs|msdn)\\.microsoft</code>"
-  },
   "options_targetReferrer": {
-    "message": "點開連結前的網站（Referrer）"
+    "message": "從特定網站（Referrer）點開連結時，才自動轉換："
   },
   "options_targetReferrerAny": {
-    "message": "所有網站"
+    "message": "不限制"
   },
   "options_targetReferrerHint": {
-    "message": "輸入 <code>hostname</code>，例如 <code>www.google.com</code>"
-  },
-  "options_targetLocales": {
-    "message": "目的網址的地區（locale）部分"
-  },
-  "options_targetLocalesAnyHTML": {
-    "message": "任何長得像的（例如 <code>en</code> 或 <code>en-US</code>）"
-  },
-  "options_targetLocalesHint": {
-    "message": "<code>xx-XX</code> 後的 <code>-XX</code> 可以省略，例：設定 <code>zh</code> 也能包含 <code>zh-TW</code> 和 <code>zh_TW</code>"
+    "message": "輸入網域名稱，例如 <code>google.com</code>"
   },
 
   "popup_toggleAutoTrigger": {

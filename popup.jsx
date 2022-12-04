@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import browser from 'webextension-polyfill';
 import classNames from 'classnames';
 
-import { isBlank, translator } from './utils';
+import { isBlank, translator, getBrowserInfo } from './utils';
 import './popup.scss';
 
 const t = translator('popup');
@@ -25,6 +25,8 @@ const Main = () => {
       v = c.showBadge?.newValue;
       v && setShowBadge(v);
     });
+
+    getBrowserInfo().then(({name}) => name && document.documentElement.classList.add(name.toLowerCase()));
   }, []);
 
   const onAction = (e) => {
@@ -57,7 +59,7 @@ const Main = () => {
     const tab = (await browser.tabs.query({ currentWindow: true, active: true }))[0];
     const result = await browser.runtime.sendMessage({action: 'delocalize', tabId: tab.id, url: tab.url});
     setFlash(result);
-    result?.success === 'success' && window.close();
+    result?.status === 'success' && window.close();
   };
 
   function clearBadge() {
@@ -67,6 +69,10 @@ const Main = () => {
   function openOptionsPage() {
     browser.runtime.openOptionsPage();
   };
+
+  if (!suspended) {
+    return;
+  }
 
   return (
     <>
