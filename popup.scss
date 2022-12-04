@@ -7,6 +7,10 @@ html {
 
   &.chrome {
     font-size: 18px;
+
+    li[data-action='clear-badge'] {
+      display: none;
+    }
   }
 }
 
