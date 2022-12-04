@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import browser from 'webextension-polyfill';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 import { isBlank, translator, getBrowserInfo } from './utils';
 import './popup.scss';
@@ -89,7 +89,7 @@ const Main = () => {
       </ul>
       <div className='flash-box'>
         {!isBlank(flash) &&
-          <p className={classNames('flash', flash.status)}>
+          <p className={clsx('flash', flash.status)}>
             {flash.msg}
             <span className='hide' onClick={() => setFlash({})} >✖</span>
           </p>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, memo, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { when, map, prop, propEq, assoc, append } from 'ramda';
-import classNames from 'classnames';
 
 import { isBlank, translator, updatePath } from '../utils';
 import DomainRule from '../DomainRule';

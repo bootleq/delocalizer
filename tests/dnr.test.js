@@ -2,7 +2,7 @@ const {diff} = require('jest-diff');
 
 import { toRedirect } from './matchers';
 import { ruleFromArgs } from './utils';
-import { fromDomainRule } from '../dnr';
+import { fromDomainRule } from '../src/dnr';
 
 expect.extend({toRedirect});
 

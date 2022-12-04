@@ -1,4 +1,4 @@
-import DomainRule, { match, replaceMatchedSegment } from '../DomainRule';
+import DomainRule, { match, replaceMatchedSegment } from '../src/DomainRule';
 
 describe('Match', () => {
   describe('By subdomain', () => {

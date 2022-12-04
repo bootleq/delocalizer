@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { map, trim, dissoc } from 'ramda';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 import { load as loadConfig, save as saveConfig } from '../config';
 import DomainRule from '../DomainRule';
@@ -131,7 +131,7 @@ const Form = () => {
     <form ref={formRef}>
       <fieldset id='actions' disabled={busy}>
         {msg.type
-          ? <span className={classNames('status-msg', msg.type)}>
+          ? <span className={clsx('status-msg', msg.type)}>
               { msg.msg }
               <span onClick={hideMsg} >✖</span>
             </span>
