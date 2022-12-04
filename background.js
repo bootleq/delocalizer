@@ -44,7 +44,7 @@ function detectReferrer(url, {targetReferrersAny, targetReferrers}) {
   if (!url) return false;
 
   const referrer = new URL(url);
-  return targetReferrers.includes(referrer.hostname);
+  return targetReferrers.some(r => referrer.hostname.endsWith(r));
 }
 
 function testRequestDomain(url, {domainRules}) {
