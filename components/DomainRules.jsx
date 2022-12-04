@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, memo, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { when, map, prop, propEq, assoc, append } from 'ramda';
 import classNames from 'classnames';
@@ -20,12 +20,33 @@ const RulePositionOptions = ({rule, ruleKey, onChange}) => {
   );
 };
 
+const Rule = memo(props => {
+  const {
+    anchored, onChange, onOpenMenu, rule,
+    rule: {key, domain, fromLocale, toLocale, enabled}
+  } = props;
+
+  return (
+    <tr className={classNames(anchored ? 'anchored' : null)}>
+      <td><input type='text' name={`${key}.domain`} value={domain} onChange={onChange} required /></td>
+      <td><RulePositionOptions rule={rule} ruleKey={key} onChange={onChange} /></td>
+      <td className='locale-dir'>
+        <input type='text' name={`${key}.fromLocale`} value={fromLocale} onChange={onChange} required />
+        <span>→</span>
+        <input type='text' name={`${key}.toLocale`} value={toLocale} onChange={onChange} />
+      </td>
+      <td><input type='checkbox' className='toggle' name={`${key}.enabled`} checked={enabled === 'yes'} onChange={onChange} /></td>
+      <td><input className='more-actions' data-key={key} type='button' value='⋯' onClick={onOpenMenu} /></td>
+    </tr>
+  );
+});
+
 const Rules = (props) => {
   const { form, setForm, disabled, items, menuOpen, setMenuOpen, menuAnchor, setMenuAnchor } = props;
 
   const [anchoredKey, setAnchoredKey] = useState();
 
-  function onChange(e) {
+  const onChange = useCallback(e => {
     const $e = e.target;
     let { name, value } = $e;
     const [ruleKey, prop] = name.split('.')
@@ -40,26 +61,17 @@ const Rules = (props) => {
         assoc(prop, value)
       ))
     ));
-  }
+  }, []);
 
-  function onOpenMenu(e) {
+  const onOpenMenu = useCallback(e =>  {
     setMenuAnchor(e.target);
     setAnchoredKey(e.target.dataset.key);
     setMenuOpen(true);
-  }
+  }, []);
 
   return items.map(r => (
-    <tr key={r.key} className={classNames(menuOpen && Number.parseInt(anchoredKey, 10) === r.key ? 'anchored' : null)}>
-      <td><input type='text' name={`${r.key}.domain`} value={r.domain} onChange={onChange} required /></td>
-      <td><RulePositionOptions rule={r} ruleKey={r.key} onChange={onChange} /></td>
-      <td className='locale-dir'>
-        <input type='text' name={`${r.key}.fromLocale`} value={r.fromLocale} onChange={onChange} required />
-        <span>→</span>
-        <input type='text' name={`${r.key}.toLocale`} value={r.toLocale} onChange={onChange} />
-      </td>
-      <td><input type='checkbox' className='toggle' name={`${r.key}.enabled`} checked={r.enabled === 'yes'} onChange={onChange} /></td>
-      <td><input className='more-actions' data-key={r.key} type='button' value='⋯' onClick={onOpenMenu} /></td>
-    </tr>
+    <Rule rule={r} key={r.key} anchored={menuOpen && Number.parseInt(anchoredKey, 10) === r.key}
+          onChange={onChange} onOpenMenu={onOpenMenu} />
   ));
 };
 
