@@ -2,8 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const dartSass = require('sass');
 const manifestFx = require('./manifest.json');
-const manifestGc = '';
-// const manifestGc = require('./manifest.chrome.json')
+const manifestGc = require('./manifest.chrome.json')
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -31,10 +30,10 @@ const plugins = [
   new CopyWebpackPlugin({
     patterns: [
       {
-        from: `manifest${BROWSER == 'firefox' ? '' : `.${BROWSER}`}.json`,
+        from: `../manifest${BROWSER == 'firefox' ? '' : `.${BROWSER}`}.json`,
         to: "manifest.json" },
-      { from: "./_locales", to: "_locales" },
-      { from: "./icons", to: "icons" },
+      { from: "../_locales", to: "_locales" },
+      { from: "../icons", to: "icons" },
     ],
   }),
   new HtmlWebpackPlugin({
@@ -67,6 +66,7 @@ if (ENV == 'production') {
 
 module.exports = {
   mode: ENV,
+  context: path.resolve(__dirname, 'src'),
   entry: {
     background: BROWSER === 'firefox' ? './background.js' : './background.worker.js',
     options: './options.jsx',
