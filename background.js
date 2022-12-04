@@ -3,7 +3,6 @@
 import browser from 'webextension-polyfill';
 
 import { load as loadConfig, save as saveConfig, withDefaults } from './config';
-import URLLocalePatterns from './URLLocalePatterns';
 import DomainRule, { match as matchRule, replaceMatchedSegment } from './DomainRule';
 
 // Basic flow:
