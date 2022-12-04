@@ -3,7 +3,7 @@
 import browser from 'webextension-polyfill';
 
 import { load as loadConfig, save as saveConfig, withDefaults } from './config';
-import DomainRule, { match as matchRule, replaceMatchedSegment } from './DomainRule';
+import { searchAndReplace } from './DomainRule';
 
 // Basic flow:
 //
@@ -47,21 +47,6 @@ function detectReferrer(url, {targetReferrersAny, targetReferrers}) {
   return targetReferrers.some(r => referrer.hostname.endsWith(r));
 }
 
-function testRequestDomain(url, {domainRules}) {
-  const domain = url.hostname;
-  let regexFilter, regexSubstitution, newUrl;
-  let seg;
-
-  const matchedRule = domainRules.find(r => {
-    seg = matchRule(r, url);
-    return seg;
-  });
-
-  if (matchedRule) {
-    return replaceMatchedSegment(matchedRule, url, seg);
-  }
-}
-
 function mutateHeader(headers, name, newValue) {
   const header = headers.find(h => h.name.toLowerCase() === name);
 
@@ -82,7 +67,7 @@ function onBeforeRequest(details) {
 
   if (!detectReferrer(originUrl, config)) return;
 
-  const newUrl = testRequestDomain(new URL(url), config);
+  const newUrl = searchAndReplace(config.domainRules, url);
   if (newUrl) {
     mutatedRequests.add(requestId);
     return { redirectUrl: newUrl };
@@ -148,7 +133,7 @@ async function doDelocalize(url, tabId, sendResponse) {
     return;
   }
 
-  const newUrl = testRequestDomain(url, config);
+  const newUrl = searchAndReplace(config.domainRules, url);
 
   if (newUrl) {
     actionRunningTabId = tabId;

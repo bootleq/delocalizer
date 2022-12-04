@@ -72,5 +72,19 @@ function replaceMatchedSegment(rule, originURL, matched) {
   return url.href;
 }
 
-export { DomainRule, match, replaceMatchedSegment, generalLocalePattern };
+function searchAndReplace(rules, inputUrl) {
+  let seg;
+  const url = new URL(inputUrl);
+
+  const matchedRule = rules.find(r => {
+    seg = match(r, url);
+    return seg;
+  });
+
+  if (matchedRule) {
+    return replaceMatchedSegment(matchedRule, url, seg);
+  }
+};
+
+export { DomainRule, match, replaceMatchedSegment, searchAndReplace, generalLocalePattern };
 export default DomainRule;
