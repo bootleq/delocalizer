@@ -1,4 +1,4 @@
-import DomainRule from '../DomainRule';
+import DomainRule from '../src/DomainRule';
 
 const ruleFromArgs = (...args) => {
   const props = ['domain', 'fromLocale', 'toLocale', 'position'].reduce(
