@@ -89,8 +89,6 @@ async function setup(config) {
     displayActionCountAsBadgeText: config.showBadge === 'yes'
   });
 
-  if (oldRules.length) return;
-
   const newRules = flatMap(r => fromDomainRule(r, config), config.domainRules);
 
   const initiatorDomains = (config.targetReferrersAny === 'no' && config.targetReferrers.length) ? config.targetReferrers : null;
