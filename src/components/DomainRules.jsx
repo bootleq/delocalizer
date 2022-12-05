@@ -118,7 +118,7 @@ const DomainRules = props => {
   useEffect(() => {
     if (form.domainRules) {
       const keys = form.domainRules.map(prop('key'));
-      maxKey.current = Math.max(...keys.map(k => Number.parseInt(k, 10)));
+      maxKey.current = keys.length ? Math.max(...keys.map(k => Number.parseInt(k, 10))) : 0;
     }
   }, [form.domainRules]);
 
