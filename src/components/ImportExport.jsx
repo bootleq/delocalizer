@@ -45,7 +45,7 @@ const ImportExport = ({setBusy, setMsg, resetConfig}) => {
       }
     } catch (e) {
       setMsg({type: 'error', msg: t('_invalid')});
-      throw new Error('匯入失敗');
+      throw new Error('Import failed');
     } finally {
       setBusy(false);
     }
@@ -53,8 +53,8 @@ const ImportExport = ({setBusy, setMsg, resetConfig}) => {
 
   return (
     <div className='import-export'>
-      <button onClick={onExport}>匯出</button>
-      <button onClick={onImportPicker}>匯入</button>
+      <button onClick={onExport}>{t('_export')}</button>
+      <button onClick={onImportPicker}>{t('_import')}</button>
       <input id='import-file' ref={fileRef} type='file' accept='.json' onChange={onImport} />
     </div>
   );

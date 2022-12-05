@@ -112,8 +112,8 @@ const DomainRuleMenu = forwardRef(({open, anchor, setMenuOpen, form, setForm}, r
       <div className='backdrop' aria-hidden onClick={onClose} onKeyDown={onKeyDown} />
       <ul ref={floating} className='more-menu' style={menuStyles} aria-label='rule operations' onKeyDown={onKeyDown} >
         <li tabIndex='-1' onClick={onDelete}>{t('_delete')}</li>
-        <li tabIndex='-1' data-direction='up' onClick={onMove}>上移</li>
-        <li tabIndex='-1' data-direction='down' onClick={onMove}>下移</li>
+        <li tabIndex='-1' data-direction='up' onClick={onMove}>{t('_moveUp')}</li>
+        <li tabIndex='-1' data-direction='down' onClick={onMove}>{t('_moveDown')}</li>
       </ul>
     </>
   );

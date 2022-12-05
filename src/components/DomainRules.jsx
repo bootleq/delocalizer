@@ -1,18 +1,24 @@
 import React, { useState, useEffect, useRef, memo, useCallback } from 'react';
 import { createPortal } from 'react-dom';
-import { when, map, prop, propEq, assoc, append } from 'ramda';
+import { when, not, map, prop, propEq, assoc, append } from 'ramda';
+import clsx from 'clsx';
 
 import { isBlank, translator, updatePath } from '../utils';
+import RulesHint from './RulesHint';
 import DomainRule from '../DomainRule';
 import Menu from './DomainRuleMenu';
 
 const t = translator('options');
 
+const rulePositionOptions = [
+  {value: 'sub.', label: t('_rulesPosSubdomain')},
+  {value: '/path', label: t('_rulesPosPath')}
+];
+
 const RulePositionOptions = ({rule, ruleKey, onChange}) => {
-  const options = [{value: 'sub.', label: '子網域'}, {value: '/path', label: '路徑'}];
   return (
     <select name={`${ruleKey}.position`} value={rule.position} onChange={onChange}>
-      {options.map(({value, label}) => (
+      {rulePositionOptions.map(({value, label}) => (
         <option value={value} key={value}>{label}</option>
       ))}
     </select>
@@ -104,6 +110,7 @@ const DomainRules = props => {
     return maxKey.current += 1;
   }
 
+  const [showHint, setShowHint] = useState(false);
   const [adding, setAdding] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuAnchor, setMenuAnchor] = useState(null);
@@ -122,6 +129,10 @@ const DomainRules = props => {
     }
   }, [adding]);
 
+  function onToggleHint(e) {
+    setShowHint(not);
+  }
+
   function onAdd(e) {
     const newItem = new DomainRule();
     const newKey = nextKey();
@@ -133,15 +144,27 @@ const DomainRules = props => {
     ));
   }
 
+  const showHintText = showHint ? t('_domainRulesCloseHint') : t('_domainRulesOpenHint');
+
   return (
     <>
+      <legend>
+        {t('_domainRulesHeader')}
+        <button type='button' className={clsx('help-toggle', showHint && 'hint-shown')} onClick={onToggleHint}>
+          <img src='../icons/question-11800-iconpacks.svg' alt='' />
+          <span>{showHintText}</span>
+        </button>
+      </legend>
+
+      <RulesHint show={showHint} onToggleHint={onToggleHint} />
+
       <table>
         <thead>
           <tr>
-            <th>網域</th>
-            <th>尋找</th>
-            <th>轉換語言</th>
-            <th>啟用</th>
+            <th>{t('_rulesThDomain')}</th>
+            <th>{t('_rulesThFind')}</th>
+            <th>{t('_rulesThLocales')}</th>
+            <th>{t('_rulesThEnabled')}</th>
             <th></th>
           </tr>
         </thead>
