@@ -224,6 +224,44 @@ code {
 
 #domain-rules {
   margin-bottom: 1em;
+
+  > legend {
+    display: flex;
+    align-items: center;
+  }
+
+  .help-toggle {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-code);
+    vertical-align: middle;
+    background-color: transparent;
+    border: none;
+    opacity: 0.3;
+
+    > span {
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    &:is(:hover, .hint-shown) {
+      > span {
+        width: initial;
+        height: initial;
+      }
+      opacity: 1;
+    }
+
+    &.hint-shown {
+      background-color: #fdffdf;
+    }
+
+    img {
+      width: 1.3rem;
+      margin: 0 4px 0 6px;
+    }
+  }
 }
 
 #domain-rules table {
@@ -300,6 +338,110 @@ code {
     &:hover {
       background-color: #ccc;
     }
+  }
+}
+
+#rules-hint {
+  --bg-color: #fdffdf;
+
+  font-size: 1.25rem;
+  padding-block: 0;
+  margin-bottom: 16px;
+  border-radius: 6px;
+  background-color: var(--bg-color);
+  box-shadow: -2px 0 4px rgba(0,0,0,0.3), 2px 2px 6px rgba(0,0,0,0.3);
+
+  > button {
+    background-color: transparent;
+    float: right;
+    font-size: 1.8rem;
+    padding-inline: 10px;
+    border: none;
+    opacity: 0.6;
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  dd {
+    padding: 4px 0;
+    margin-left: 2em;
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+
+  dl.samples {
+    margin-top: 0;
+    font-size: 1.1rem;
+    dt:first-child {
+      padding-top: 1px;
+    }
+    code {
+      color: #777;
+    }
+    .to {
+      margin-left: 12px;
+      vertical-align: middle;
+    }
+  }
+
+  .field-term {
+    padding: 2px 4px 3px;
+    border-right: 1px dotted #444;
+    font-size: 1.1rem;
+    background-color: #efeff2;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+  }
+
+  #rules-hint-fields {
+    h2 {
+      font-size: inherit;
+      font-weight: normal;
+      margin-block: 10px;
+    }
+
+    hr {
+      margin: 0;
+    }
+
+    dl {
+      margin: 4px 0 0;
+      dt {
+        display: inline-block;
+        width: min-content;
+        white-space: nowrap;
+        text-align: center;
+        font-size: 1.1rem;
+
+        samp {
+          font-family: var(--font-code);
+          margin-left: 8px;
+          var {
+            border-bottom: 1px solid black;
+            &:hover {
+              background-color: gold;
+            }
+          }
+        }
+      }
+
+      dd {
+        margin-inline: 1em;
+      }
+    }
+  }
+
+  var {
+    color: black;
+    &.locale {
+      color: #0061e0;
+    }
+  }
+
+  p {
+    margin-block: 4px;
   }
 }
 

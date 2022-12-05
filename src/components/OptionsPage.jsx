@@ -143,10 +143,8 @@ const Form = () => {
       </fieldset>
 
       <fieldset id='domain-rules'>
-        <legend>{t('_domainRulesHeader')}</legend>
         <DomainRules {...commonListProps}></DomainRules>
       </fieldset>
-
 
       <fieldset id='details' disabled={busy}>
         <TargetReferrers {...commonListProps}></TargetReferrers>
