@@ -95,7 +95,7 @@
     "message": "."
   },
   "options_domainRulesHintLocalesDefination": {
-    "message": "Represents as two parts, the former is the “original locale” of old URL, and the latter is the “destination locale” to be replaced to."
+    "message": "Represents as two parts, the former is the “original locale” of old URL, the latter is the “destination locale” to be replaced to."
   },
   "options_domainRulesHintLocalesShortcut_preShort": {
     "message": "With 2-digits value (e.g., ",
@@ -124,14 +124,14 @@
     "message": "."
   },
   "options_domainRulesHintLocalesLatterBlank": {
-    "message": "Destination locale accepts blank, means replace old locale to none (remove), will send altered accept-language header, let the server decide which locale is applicable."
+    "message": "Destination locale accepts blank, means replace old locale to none (just remove), will send altered accept-language header, let the server decide which locale is applicable."
   },
   "options_domainRulesHintLocalesLatterBlankRestrict_pre": {
-    "message": "When choose find by “path”, does not accept transform from ",
+    "message": "When choosing “Find” by “path”, transform from ",
     "description": "Hint about 'to' locale, this term is prefixed to the 'star' value"
   },
   "options_domainRulesHintLocalesLatterBlankRestrict_post": {
-    "message": " to blank, to avoid generate too generic matches.",
+    "message": " to blank is disallowed, to avoid generate too generic matches.",
     "description": "Hint about 'to' locale, this term is suffixed to the 'star' value"
   },
 
