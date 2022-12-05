@@ -4,7 +4,11 @@ import browser from "webextension-polyfill";
 import { translator } from '../utils';
 
 const t = translator('options');
-const uiLang = browser.i18n.getUILanguage();
+
+let uiLang = browser.i18n.getUILanguage();
+if (uiLang.startsWith('en')) {
+  uiLang = 'zh-TW';
+}
 
 const Hint = ({show, onToggleHint}) => {
 
