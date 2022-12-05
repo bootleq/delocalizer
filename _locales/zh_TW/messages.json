@@ -50,6 +50,83 @@
   "options_domainRulesHeader": {
     "message": "個別網站的自動轉換"
   },
+
+  "options_domainRulesOpenHint": {
+    "message": "顯示說明"
+  },
+  "options_domainRulesCloseHint": {
+    "message": "隱藏說明"
+  },
+  "options_domainRulesHintExample1": {
+    "message": "範例 1："
+  },
+  "options_domainRulesHintExample2": {
+    "message": "範例 2："
+  },
+  "options_domainRulesHintQuotedSubdomain": {
+    "message": "「子網域」"
+  },
+  "options_domainRulesHintQuotedPath": {
+    "message": "「路徑」"
+  },
+  "options_domainRulesHintTransTo": {
+    "message": "轉換成"
+  },
+  "options_domainRulesHintDomainDefination": {
+    "message": "指明要自動轉換的網站，請輸入網域名稱。"
+  },
+  "options_domainRulesHintDomainShortcut_preDomain": {
+    "message": "不必輸入子網域，例如只要輸入 ",
+    "description": "Hint about sub-domain, this term is prefixed to example 'domain without sub-domain' value"
+  },
+  "options_domainRulesHintDomainShortcut_postDomain": {
+    "message": "，就能包含 ",
+    "description": "Hint about sub-domain, this term is suffixed to example 'domain without sub-domain' value"
+  },
+  "options_domainRulesHintDomainShortcut_tail": {
+    "message": "。"
+  },
+  "options_domainRulesHintLocalesDefination": {
+    "message": "分為前後兩項，前面是原網址中的「原始語言」，後面是要替換成的「目的語言」。"
+  },
+  "options_domainRulesHintLocalesShortcut_preShort": {
+    "message": "語言只輸入兩個字時（例如 ",
+    "description": "Hint about from/to locales, this term is prefixed to example 'two-digits' locale value"
+  },
+  "options_domainRulesHintLocalesShortcut_postShort": {
+    "message": "），會自動包含 ",
+    "description": "Hint about from/to locales, this term is suffixed to example 'two-digits' locale value"
+  },
+  "options_domainRulesHint_separators": {
+    "message": "、",
+    "description": "Hint about from/to locales, this term is in between each expanded (from the two-digits shorthand) examples"
+  },
+  "options_domainRulesHintLocalesShortcut_tail": {
+    "message": "等變型。"
+  },
+  "options_domainRulesHintLocalesFormer_preStar": {
+    "message": "第一項可以輸入「",
+    "description": "Hint about 'from' locale, this term is prefixed to the 'star' value"
+  },
+  "options_domainRulesHintLocalesFormer_postStar": {
+    "message": "」，表示任何語言都可以，例如 ",
+    "description": "Hint about 'from' locale, this term is suffixed to the 'star' value"
+  },
+  "options_domainRulesHintLocalesFormer_tail": {
+    "message": "。"
+  },
+  "options_domainRulesHintLocalesLatterBlank": {
+    "message": "第二項可以留空，表示把語言部分換成空白，會送出替換用的 accept-language 標頭，交由網站伺服器判斷適合的語言。"
+  },
+  "options_domainRulesHintLocalesLatterBlankRestrict_pre": {
+    "message": "選擇尋找「路徑」時，不能設定由 ",
+    "description": "Hint about 'to' locale, this term is prefixed to the 'star' value"
+  },
+  "options_domainRulesHintLocalesLatterBlankRestrict_post": {
+    "message": " 轉到空白，因為所有網址都會符合。",
+    "description": "Hint about 'to' locale, this term is suffixed to the 'star' value"
+  },
+
   "options_rulesThDomain": {
     "message": "網域"
   },

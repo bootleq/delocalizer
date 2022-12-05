@@ -144,7 +144,7 @@ const DomainRules = props => {
     ));
   }
 
-  const showHintText = showHint ? '隱藏說明' : '顯示說明';
+  const showHintText = showHint ? t('_domainRulesCloseHint') : t('_domainRulesOpenHint');
 
   return (
     <>

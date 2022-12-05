@@ -1,6 +1,9 @@
 import React from 'react';
 import browser from "webextension-polyfill";
 
+import { translator } from '../utils';
+
+const t = translator('options');
 const uiLang = browser.i18n.getUILanguage();
 
 const Hint = ({show, onToggleHint}) => {
@@ -11,43 +14,59 @@ const Hint = ({show, onToggleHint}) => {
 
   return (
     <div id='rules-hint'>
-      <button type='button' title={'close'} onClick={onToggleHint}>✖</button>
+      <button type='button' title={t('_domainRulesCloseHint')} onClick={onToggleHint}>✖</button>
       <dl className='samples'>
-        <dt>範例 1：<span className='field-term'>尋找</span>「子網域」</dt>
+        <dt>{t('_domainRulesHintExample1')}<span className='field-term'>{t('_rulesThFind')}</span>{t('_domainRulesHintQuotedSubdomain')}</dt>
         <dd>
-          <code>https://<var className='locale'>{uiLang}</var>.<var className='domain'>abc.com</var>/foo</code> <span className='to'>轉換成</span> <br />
+          <code>https://<var className='locale'>{uiLang}</var>.<var className='domain'>abc.com</var>/foo</code> <span className='to'>{t('_domainRulesHintTransTo')}</span><br />
           <code>https://<var className='locale'>en-US</var>.<var className='domain'>abc.com</var>/foo</code>
         </dd>
 
-        <dt>範例 2：<span className='field-term'>尋找</span>「路徑」</dt>
+        <dt>{t('_domainRulesHintExample2')}<span className='field-term'>{t('_rulesThFind')}</span>{t('_domainRulesHintQuotedPath')}</dt>
         <dd>
-          <code>https://<var className='domain'>abc.com</var>/<var className='locale'>{uiLang}</var>/foo</code> <span className='to'>轉換成</span> <br />
+          <code>https://<var className='domain'>abc.com</var>/<var className='locale'>{uiLang}</var>/foo</code> <span className='to'>{t('_domainRulesHintTransTo')}</span><br />
           <code>https://<var className='domain'>abc.com</var>/<var className='locale'>en-US</var>/foo</code>
         </dd>
       </dl>
 
       <div id='rules-hint-fields'>
         <dl>
-          <dt><span className='field-term'>網域</span><samp><var>abc.com</var></samp></dt>
+          <dt><span className='field-term'>{t('_rulesThDomain')}</span><samp><var>abc.com</var></samp></dt>
           <dd>
-            指明要自動轉換的網站，請輸入網域名稱。
+            {t('_domainRulesHintDomainDefination')}
             <br />
-            不必輸入子網域，例如只要輸入 <code>abc.com</code>，就能包含 <code>xxx.abc.com</code>。
+            {t('_domainRulesHintDomainShortcut_preDomain')}<code>abc.com</code>{t('_domainRulesHintDomainShortcut_postDomain')}<code>xxx.abc.com</code>{t('_domainRulesHintDomainShortcut_tail')}
           </dd>
-          <dt><span className='field-term'>轉換語言</span><samp><var>zh-TW</var> → <var>en-US</var></samp></dt>
+          <dt><span className='field-term'>{t('_rulesThLocales')}</span><samp><var>zh-TW</var> → <var>en-US</var></samp></dt>
           <dd>
-            分為前後兩項，前面是原網址中的「原始語言」，後面是要替換成的「目的語言」。
+            {t('_domainRulesHintLocalesDefination')}
             <p>
-              語言只輸入兩個字時（例如 <code>xx</code>），會自動包含 <code>xx-XX</code>、<code>xx_XX</code>、<code>xx-xxxx</code> 等變型。
+              {t('_domainRulesHintLocalesShortcut_preShort')}
+              <code>xx</code>
+              {t('_domainRulesHintLocalesShortcut_postShort')}
+              <code>xx-XX</code>
+              {t('_domainRulesHint_separators')}
+              <code>xx_XX</code>
+              {t('_domainRulesHint_separators')}
+              <code>xx-xxxx</code>
+              {t('_domainRulesHintLocalesShortcut_tail')}
             </p>
             <hr />
             <p>
-              第一項可以輸入「<code>*</code>」，表示任何語言都可以，例如 <code>yy</code>、<code>zz-ZZ</code>。
+              {t('_domainRulesHintLocalesFormer_preStar')}
+              <code>*</code>
+              {t('_domainRulesHintLocalesFormer_postStar')}
+              <code>yy</code>
+              {t('_domainRulesHint_separators')}
+              <code>zz-ZZ</code>
+              {t('_domainRulesHintLocalesFormer_tail')}
             </p>
             <p>
-              第二項可以留空，表示把語言部分換成空白，會送出替換用的 accept-language 標頭，交由網站伺服器判斷適合的語言。
+              {t('_domainRulesHintLocalesLatterBlank')}
               <br />
-              選擇尋找「路徑」時，不能設定由 <code>*</code> 轉到空白，因為所有網址都會符合。
+              {t('_domainRulesHintLocalesLatterBlankRestrict_pre')}
+              <code>*</code>
+              {t('_domainRulesHintLocalesLatterBlankRestrict_post')}
             </p>
           </dd>
         </dl>
