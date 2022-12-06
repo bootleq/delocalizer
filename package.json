@@ -1,6 +1,6 @@
 {
-  "name": "Delocalizer",
-  "description": "Prevent locale being auto switch by website",
+  "name": "delocalizer",
+  "description": "Web extension to read untranslated document, go away from localized URL",
   "private": true,
   "dependencies": {
     "@floating-ui/react-dom": "^1.0.1",
