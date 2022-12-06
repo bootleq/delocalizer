@@ -23,9 +23,32 @@ Here list some URLs and where they will be converted by this extension.
     https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing
                                   ^^^^^
 
+Development
+-----------
+
+Some scripts for development, note the names without `:chrome` imply Firefox.
+
+Make temporary build to `build` folder:
+
+    yarn build
+    yarn build:chrome
+
+    yarn build watch
+
+Unit tests
+
+    yarn test
+    yarn test --watch
+
+Package a zip file:
+
+    yarn build:prod
+    yarn build:prod:chrome
+
+
 
 See also
-----------------
+--------
 
 - [locale-switcher][]
 - [msdn-delocalizer][]

@@ -38,11 +38,9 @@
     "zip-webpack-plugin": "^4.0.1"
   },
   "scripts": {
-    "dev": "webpack watch",
     "build": "webpack",
     "build:prod": "cross-env NODE_ENV=production webpack",
     "test": "jest",
-    "test:watch": "jest --watch",
     "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
     "dev:chrome": "cross-env BROWSER=chrome webpack watch",
     "build:chrome": "cross-env BROWSER=chrome webpack",
