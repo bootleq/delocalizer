@@ -9,7 +9,6 @@
   "manifest_version": 3,
 
   "permissions": [
-    "webRequest",
     "declarativeNetRequest",
     "storage"
   ],
