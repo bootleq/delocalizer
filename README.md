@@ -35,6 +35,10 @@ Make temporary build to `build` folder:
 
     yarn build watch
 
+Lint
+
+    yarn lint
+
 Unit tests
 
     yarn test
