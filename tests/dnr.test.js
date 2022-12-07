@@ -1,5 +1,3 @@
-const {diff} = require('jest-diff');
-
 import { toRedirect } from './matchers';
 import { ruleFromArgs } from './utils';
 import { fromDomainRule } from '../src/dnr';
@@ -10,7 +8,7 @@ describe('fromDomainRule, to DNR Rule', () => {
   describe('subdomain rule', () => {
     const preferredLang = 'en-US,en,*;q=0.5';
 
-    test('* -> en, got 1 redirect rule', () => {
+    it('* -> en, got 1 redirect rule', () => {
       const rule = ruleFromArgs('reactjs.org', '*', 'en', 'sub.');
       const config = {domainRules: [rule], preferredLang};
       const result = fromDomainRule(rule, config);
@@ -39,7 +37,7 @@ describe('fromDomainRule, to DNR Rule', () => {
       );
     });
 
-    test('* -> (blank), got 1 redirect rule + 1 modifyHeaders rule', () => {
+    it('* -> (blank), got 1 redirect rule + 1 modifyHeaders rule', () => {
       const rule = ruleFromArgs('reactjs.org', '*', '', 'sub.');
       const config = {domainRules: [rule], preferredLang};
       const result = fromDomainRule(rule, config);
@@ -90,7 +88,7 @@ describe('fromDomainRule, to DNR Rule', () => {
   describe('pathname rule', () => {
     const preferredLang = 'en-US,en,*;q=0.5';
 
-    test('* -> en, got 1 redirect rule', () => {
+    it('* -> en, got 1 redirect rule', () => {
       const rule = ruleFromArgs('mozilla.org', '*', 'en', '/path');
       const config = {domainRules: [rule], preferredLang};
       const result = fromDomainRule(rule, config);
@@ -119,7 +117,7 @@ describe('fromDomainRule, to DNR Rule', () => {
       );
     });
 
-    test('* -> (blank), got 1 redirect rule + 1 modifyHeaders rule', () => {
+    it('* -> (blank), got 1 redirect rule + 1 modifyHeaders rule', () => {
       const rule = ruleFromArgs('mozilla.org', '*', '', '/path');
       const config = {domainRules: [rule], preferredLang};
       const result = fromDomainRule(rule, config);
