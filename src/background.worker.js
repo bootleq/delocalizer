@@ -25,7 +25,7 @@ function onStorageChange(changes) {
   const newConfig = Object.fromEntries(
     Object.entries(changes)
       .map(([k, {newValue}]) => [k, newValue])
-      .filter(([k, v]) => v)
+      .filter(([, v]) => v)
   );
 
   config = {...config, ...withDefaults(newConfig, Object.keys(changes))};
