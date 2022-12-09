@@ -53,22 +53,22 @@ const Main = () => {
 
   function toggle() {
     browser.runtime.sendMessage({action: 'toggle'});
-  };
+  }
 
   async function deLocalizeNow() {
     const tab = (await browser.tabs.query({ currentWindow: true, active: true }))[0];
     const result = await browser.runtime.sendMessage({action: 'delocalize', tabId: tab.id, url: tab.url});
     setFlash(result);
     result?.status === 'success' && window.close();
-  };
+  }
 
   function clearBadge() {
     browser.runtime.sendMessage({action: 'clear-badge'});
-  };
+  }
 
   function openOptionsPage() {
     browser.runtime.openOptionsPage();
-  };
+  }
 
   if (!suspended) {
     return;

@@ -84,7 +84,7 @@ function searchAndReplace(rules, inputUrl) {
   if (matchedRule) {
     return replaceMatchedSegment(matchedRule, url, seg);
   }
-};
+}
 
 export { DomainRule, match, replaceMatchedSegment, searchAndReplace, generalLocalePattern };
 export default DomainRule;
