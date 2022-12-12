@@ -10,7 +10,8 @@ if (uiLang.startsWith('en')) {
   uiLang = 'zh-TW';
 }
 
-const Hint = ({show, onToggleHint}) => {
+type HintProps = {show: boolean, onToggleHint: () => void};
+const Hint = ({show, onToggleHint}: HintProps) => {
 
   if (!show) {
     return;
