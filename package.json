@@ -46,7 +46,7 @@
     "zip-webpack-plugin": "^4.0.1"
   },
   "scripts": {
-    "lint": "eslint --cache --ext js,jsx src tests",
+    "lint": "eslint --cache --ext js,jsx,ts,tsx src tests",
     "build": "webpack",
     "build:prod": "cross-env NODE_ENV=production webpack",
     "test": "jest",

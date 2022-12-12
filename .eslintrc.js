@@ -26,6 +26,11 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
   },
+  settings: {
+    react: {
+      version: 'detect'
+    },
+  },
   overrides: [
     {
       files: ['tests/**'],
@@ -44,7 +49,7 @@ module.exports = {
       }
     },
     {
-      files: ['.eslintrc.js'],
+      files: ['.eslintrc.js', '*.config.js'],
       env: {
         node: true
       }
