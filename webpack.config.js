@@ -88,11 +88,11 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|ts|jsx|tsx)$/,
         exclude: /(node_modules)/,
         loader: "babel-loader",
         resolve: {
-          extensions: ['.js', '.jsx']
+          extensions: ['.ts', '.tsx', '.js', '.jsx']
         }
       },
       {
