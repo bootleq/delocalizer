@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, memo, useCallback } from 'react';
-import { createPortal } from 'react-dom';
 import { when, not, map, prop, propEq, assoc, append } from 'ramda';
 import clsx from 'clsx';
 
@@ -129,11 +128,11 @@ const DomainRules = props => {
     }
   }, [adding]);
 
-  function onToggleHint(e) {
+  function onToggleHint() {
     setShowHint(not);
   }
 
-  function onAdd(e) {
+  function onAdd() {
     const newItem = new DomainRule();
     const newKey = nextKey();
 
