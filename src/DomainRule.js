@@ -2,7 +2,7 @@
 
 const generalLocalePattern = new RegExp([
   /(?:[a-zA-Z]{2})/,    // en
-  /(?:[\-_]\w{2,4})?/,  // -US or _US (optional) or even -hant
+  /(?:[-_]\w{2,4})?/,  // -US or _US (optional) or even -hant
 ].map(r => r.source).join(''));
 
 class DomainRule {
@@ -39,7 +39,6 @@ function match(rule, url) {
     } else {
       return seg.startsWith(fromLocale) ? seg : undefined;
     }
-    break;
   case '/path':
     seg = url.pathname.split('/')[1];
 
