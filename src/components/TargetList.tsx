@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, forwardRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback, forwardRef } from 'react';
 import { isBlank, translator } from '../utils';
 
 const t = translator('options');
@@ -30,7 +30,7 @@ const OptionList = forwardRef(function OptionListInner(props: OptionListProps, r
       ref.current.querySelector('li:last-child > input[type="text"]').focus();
       onAdded();
     }
-  }, [adding]);
+  }, [adding, ref, onAdded]);
 
   const list = Object.entries(items).map(([k, v]) => (
     <li key={k} data-key={k}>
@@ -61,7 +61,7 @@ type TargetListProps = {
 
 const TargetList = (props: TargetListProps) => {
   const { slots, configName, form, setForm, busy } = props;
-  const [adding, setAdding] = useState(null);
+  const [adding, setAdding] = useState(false);
   const loaded = !isBlank(form);
 
   const listRef = useRef<HTMLUListElement>(null);
@@ -137,9 +137,9 @@ const TargetList = (props: TargetListProps) => {
     };
   }
 
-  function onAdded() {
+  const onAdded = useCallback(() => {
     setAdding(false);
-  }
+  }, [setAdding]);
 
   return (
     form &&

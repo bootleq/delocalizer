@@ -45,13 +45,13 @@ const DomainRuleMenu = forwardRef(function DomainRuleMenuInner({open, anchor, se
       const item = ref.current.querySelector(`li:nth-child(${currentIndex + 1})`);
       item?.focus();
     }
-  }, [open, ref.current, currentIndex]);
+  }, [open, ref, reference, currentIndex]);
 
   useEffect(() => {
     if (ref.current) {
       itemsCountRef.current = ref.current.children.length;
     }
-  }, [ref.current]);
+  }, [ref]);
 
   function onDelete() {
     const key = Number.parseInt(anchor.dataset.key, 10);

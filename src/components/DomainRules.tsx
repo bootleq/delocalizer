@@ -107,13 +107,13 @@ const Rules = (props: RulesProps) => {
         assoc(prop, value)
       ))
     ));
-  }, []);
+  }, [setForm]);
 
   const onOpenMenu = useCallback(e =>  {
     setMenuAnchor(e.target);
     setAnchoredKey(e.target.dataset.key);
     setMenuOpen(true);
-  }, []);
+  }, [setMenuAnchor, setAnchoredKey, setMenuOpen]);
 
   return items.map(r => (
     <Rule rule={r} key={r.key} anchored={menuOpen && Number.parseInt(anchoredKey, 10) === r.key}
