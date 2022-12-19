@@ -52,7 +52,7 @@ function onBeforeRequest(details) {
 }
 
 function onBeforeSendHeaders(details) {
-  const { requestHeaders: headers, requestId, tabId, url} = details;
+  const { requestHeaders: headers, requestId, tabId } = details;
 
   if (mutatedRequests.has(requestId) || tabId === state.actionRunningTabId) {
     mutateHeader(headers, 'accept-language', config.preferredLang);

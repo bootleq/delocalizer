@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, memo, useCallback } from 'react';
-import { createPortal } from 'react-dom';
 import { when, not, map, prop, propEq, assoc, append } from 'ramda';
 import clsx from 'clsx';
 
@@ -8,6 +7,8 @@ import RulesHint from './RulesHint';
 import DomainRule from '../DomainRule';
 import Menu from './DomainRuleMenu';
 
+import type { FormContract } from "./OptionsPage";
+
 const t = translator('options');
 
 const rulePositionOptions = [
@@ -15,7 +16,13 @@ const rulePositionOptions = [
   {value: '/path', label: t('_rulesPosPath')}
 ];
 
-const RulePositionOptions = ({rule, ruleKey, onChange}) => {
+interface RulePositionOptionsProps {
+  rule: DomainRule,
+  ruleKey: number,
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+}
+
+const RulePositionOptions = ({rule, ruleKey, onChange}: RulePositionOptionsProps) => {
   return (
     <select name={`${ruleKey}.position`} value={rule.position} onChange={onChange}>
       {rulePositionOptions.map(({value, label}) => (
@@ -25,7 +32,14 @@ const RulePositionOptions = ({rule, ruleKey, onChange}) => {
   );
 };
 
-const Rule = memo(props => {
+interface RuleProps {
+  anchored: boolean,
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  onOpenMenu: (e: React.MouseEvent<HTMLElement>) => void,
+  rule: DomainRule,
+}
+
+const Rule = memo(function RuleInner(props: RuleProps) {
   const {
     anchored, onChange, onOpenMenu, rule,
     rule: {key, domain, fromLocale, toLocale, enabled}
@@ -64,15 +78,24 @@ const Rule = memo(props => {
   );
 });
 
-const Rules = (props) => {
-  const { form, setForm, disabled, items, menuOpen, setMenuOpen, menuAnchor, setMenuAnchor } = props;
+interface RulesProps {
+  setForm: (form: FormContract) => FormContract,
+  disabled: boolean,
+  items: DomainRule[],
+  menuOpen: boolean,
+  setMenuOpen: (state: boolean) => boolean,
+  setMenuAnchor: (el: HTMLElement) => HTMLElement,
+}
+
+const Rules = (props: RulesProps) => {
+  const { setForm, items, menuOpen, setMenuOpen, setMenuAnchor } = props;
 
   const [anchoredKey, setAnchoredKey] = useState();
 
   const onChange = useCallback(e => {
     const $e = e.target;
-    let { name, value } = $e;
-    const [ruleKey, prop] = name.split('.')
+    let { value } = $e;
+    const [ruleKey, prop] = $e.name.split('.')
 
     if ($e.type === 'checkbox') {
       value = $e.checked ? 'yes' : 'no';
@@ -84,13 +107,13 @@ const Rules = (props) => {
         assoc(prop, value)
       ))
     ));
-  }, []);
+  }, [setForm]);
 
   const onOpenMenu = useCallback(e =>  {
     setMenuAnchor(e.target);
     setAnchoredKey(e.target.dataset.key);
     setMenuOpen(true);
-  }, []);
+  }, [setMenuAnchor, setAnchoredKey, setMenuOpen]);
 
   return items.map(r => (
     <Rule rule={r} key={r.key} anchored={menuOpen && Number.parseInt(anchoredKey, 10) === r.key}
@@ -99,7 +122,13 @@ const Rules = (props) => {
 };
 
 
-const DomainRules = props => {
+interface DomainRulesProps {
+  form: FormContract,
+  setForm: (form: FormContract) => FormContract,
+  busy: boolean,
+}
+
+const DomainRules = (props: DomainRulesProps) => {
   const { form, setForm, busy } = props;
 
   const listRef = useRef();
@@ -117,8 +146,8 @@ const DomainRules = props => {
 
   useEffect(() => {
     if (form.domainRules) {
-      const keys = form.domainRules.map(prop('key'));
-      maxKey.current = keys.length ? Math.max(...keys.map(k => Number.parseInt(k, 10))) : 0;
+      const keys = form.domainRules.map(prop('key')).map(Number);
+      maxKey.current = keys.length ? Math.max(...keys) : 0;
     }
   }, [form.domainRules]);
 
@@ -129,11 +158,11 @@ const DomainRules = props => {
     }
   }, [adding]);
 
-  function onToggleHint(e) {
+  function onToggleHint() {
     setShowHint(not);
   }
 
-  function onAdd(e) {
+  function onAdd() {
     const newItem = new DomainRule();
     const newKey = nextKey();
 
@@ -170,8 +199,8 @@ const DomainRules = props => {
         </thead>
         <tbody ref={listRef}>
           {!isBlank(form) &&
-            <Rules form={form} setForm={setForm}
-                   {...{ menuOpen, setMenuOpen, menuAnchor, setMenuAnchor }}
+            <Rules setForm={setForm}
+                   {...{ menuOpen, setMenuOpen, setMenuAnchor }}
                    items={form.domainRules} disabled={busy} />
           }
         </tbody>

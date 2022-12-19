@@ -2,11 +2,18 @@
 
 const generalLocalePattern = new RegExp([
   /(?:[a-zA-Z]{2})/,    // en
-  /(?:[\-_]\w{2,4})?/,  // -US or _US (optional) or even -hant
+  /(?:[-_]\w{2,4})?/,  // -US or _US (optional) or even -hant
 ].map(r => r.source).join(''));
 
 class DomainRule {
-  constructor(config) {
+  fromLocale: string;
+  position: string;
+  domain: string;
+  toLocale: string;
+  enabled: 'yes' | 'no';
+  key?: number;
+
+  constructor(config?) {
     this.fromLocale = config?.fromLocale ?? '*';    // zh, zh-TW, .etc. "*" for any locales
     this.position   = config?.position   ?? 'sub.'; // "sub." | "/path"
     this.domain     = config?.domain     ?? '';
@@ -39,7 +46,6 @@ function match(rule, url) {
     } else {
       return seg.startsWith(fromLocale) ? seg : undefined;
     }
-    break;
   case '/path':
     seg = url.pathname.split('/')[1];
 
@@ -84,7 +90,7 @@ function searchAndReplace(rules, inputUrl) {
   if (matchedRule) {
     return replaceMatchedSegment(matchedRule, url, seg);
   }
-};
+}
 
 export { DomainRule, match, replaceMatchedSegment, searchAndReplace, generalLocalePattern };
 export default DomainRule;

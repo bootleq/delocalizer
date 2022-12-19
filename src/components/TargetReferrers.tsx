@@ -1,12 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import TargetList from './TargetList';
 import { translator } from '../utils';
 
 const t = translator('options');
 
-const TargetReferrers = props => {
-  const { form, setForm, busy } = props;
+interface Props {
+  form: object,
+  setForm: (form: object) => object,
+  busy: boolean,
+}
 
+const TargetReferrers = ({ form, setForm, busy }: Props) => {
   const slots = {
     legend: t('_targetReferrer'),
     labelAny: t('_targetReferrerAny'),

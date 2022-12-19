@@ -34,7 +34,7 @@ const ModifyHeaderRule = {
 
 function fromDomainRule(rule, config) {
   const { position, fromLocale, toLocale, domain } = rule;
-  const { preferredLang, targetReferrers } = config;
+  const { preferredLang } = config;
 
   let redirRule, seg, regexFilter, regexSub, headerRule;
 

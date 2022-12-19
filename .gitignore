@@ -5,5 +5,6 @@ Desktop.ini
 build
 dist
 node_modules
+.eslintcache
 stats.json
 .tool-versions

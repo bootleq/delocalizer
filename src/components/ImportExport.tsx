@@ -5,7 +5,13 @@ import { translator } from '../utils';
 
 const t = translator('options');
 
-const ImportExport = ({setBusy, setMsg, resetConfig}) => {
+interface Props {
+  setBusy: (state: boolean) => boolean,
+  setMsg: (msg: object) => object,
+  resetConfig: (config: object) => void,
+}
+
+const ImportExport = ({setBusy, setMsg, resetConfig}: Props) => {
   const fileRef = useRef();
 
   async function onExport(e) {

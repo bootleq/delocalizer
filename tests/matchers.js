@@ -32,6 +32,6 @@ function toRedirect (dnrRule, url, destinationUrl) {
     };
 
   return {pass, message};
-};
+}
 
 export { toRedirect };

@@ -5,7 +5,7 @@ describe('Match', () => {
     describe('URL WITH target', () => {
       const url = 'https://zh-hant.reactjs.org/docs/getting-started.html';
       //                   ^^^^^^^^
-      test.each([
+      it.each([
         // domain       fromLocale toLocale   position enabled
         ['reactjs.org', 'zh',      '',        'sub.',   'yes', 'zh-hant.'],
         ['reactjs.org', 'zh-hant', '',        'sub.',   'yes', 'zh-hant.'],
@@ -29,7 +29,7 @@ describe('Match', () => {
     describe('URL WITHOUT target', () => {
       const url = 'https://reactjs.org/docs/getting-started.html';
 
-      test.each([
+      it.each([
         // domain       fromLocale toLocale   position enabled
         ['reactjs.org', 'zh',      '',        'sub.',   'yes', undefined],
         ['reactjs.org', '*',       '',        'sub.',   'yes', undefined],
@@ -43,7 +43,7 @@ describe('Match', () => {
     describe('Other subdomain', () => {
       const url = 'https://gist.github.com/discover';
 
-      test.each([
+      it.each([
         // domain    fromLocale toLocale position  enabled
         ['github.com', 'xx',      '',      'sub.',   'yes', undefined],
         ['github.com', '*',       '',      'sub.',   'yes', 'gist.'],
@@ -59,7 +59,7 @@ describe('Match', () => {
     describe('URL WITH target', () => {
       const url = 'https://developer.mozilla.org/zh-TW/docs/Web/HTML';
       //                                        ^^^^^^
-      test.each([
+      it.each([
         // domain     fromLocale toLocale position enabled
         ['mozilla.org', 'zh',    '',      '/path', 'yes', '/zh-TW'],
         ['mozilla.org', 'zh-TW', '',      '/path', 'yes', '/zh-TW'],
@@ -79,7 +79,7 @@ describe('Match', () => {
     describe('URL WITHOUT target', () => {
       const url = 'https://developer.mozilla.org/docs/Web/HTML';
 
-      test.each([
+      it.each([
         // domain     fromLocale toLocale position enabled
         ['mozilla.org', 'zh',    '',      '/path', 'yes', undefined],
         ['mozilla.org', '*',     '',      '/path', 'yes', undefined], // avoid too generic match
@@ -93,7 +93,7 @@ describe('Match', () => {
 });
 
 describe('replaceMatchedSegment', () => {
-  test.each([
+  it.each([
     //   url                                      matched    to     pos     expected
     ['https://zh-hant.reactjs.org/docs/a?b=c#d', 'zh-hant.', '',   'sub.',  'https://reactjs.org/docs/a?b=c#d'],
     ['https://zh-hant.reactjs.org/docs/a?b=c#d', 'zh-hant.', 'ja', 'sub.',  'https://ja.reactjs.org/docs/a?b=c#d'],

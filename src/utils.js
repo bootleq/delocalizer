@@ -42,7 +42,7 @@ function translator(prefix) {
 }
 
 async function getBrowserInfo() {
-  if (browser.runtime.hasOwnProperty('getBrowserInfo')) {
+  if (Object.prototype.hasOwnProperty.call(browser.runtime, 'getBrowserInfo')) {
     return await browser.runtime.getBrowserInfo();
   }
 

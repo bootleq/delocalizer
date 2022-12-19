@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useLayoutEffect, useRef, forwardRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useFloating } from '@floating-ui/react-dom';
-import { dissocPath, over, lensProp, reject, propEq, move } from 'ramda';
+import { reject, propEq, move } from 'ramda';
 
 import { translator, updatePath } from '../utils';
+
+import type { FormContract } from "./OptionsPage";
 
 const t = translator('options');
 
@@ -14,7 +16,15 @@ const loopWithin = (currentIndex, size, direction) => {
   return next;
 };
 
-const DomainRuleMenu = forwardRef(({open, anchor, setMenuOpen, form, setForm}, ref) => {
+interface DomainRuleMenuProps {
+  open: boolean,
+  anchor: HTMLElement,
+  setMenuOpen: (state: boolean) => boolean,
+  form: FormContract,
+  setForm: (form: FormContract) => FormContract,
+}
+
+const DomainRuleMenu = forwardRef(function DomainRuleMenuInner({open, anchor, setMenuOpen, form, setForm}: DomainRuleMenuProps, ref) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsCountRef = useRef(0);
 
@@ -37,15 +47,15 @@ const DomainRuleMenu = forwardRef(({open, anchor, setMenuOpen, form, setForm}, r
       const item = ref.current.querySelector(`li:nth-child(${currentIndex + 1})`);
       item?.focus();
     }
-  }, [open, ref.current, currentIndex]);
+  }, [open, ref, reference, currentIndex]);
 
   useEffect(() => {
     if (ref.current) {
       itemsCountRef.current = ref.current.children.length;
     }
-  }, [ref.current]);
+  }, [ref]);
 
-  function onDelete(e) {
+  function onDelete() {
     const key = Number.parseInt(anchor.dataset.key, 10);
     setForm(updatePath(
       ['domainRules'],

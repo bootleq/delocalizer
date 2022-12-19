@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
+    "allowJs": true,
+    "noEmit": true,
+
+    // "strict": true,
+    // "noImplicitAny": true,
+    "forceConsistentCasingInFileNames": true,
+  },
+  "include": ["src/**/*.tsx", "tests/**/*"],
+}
