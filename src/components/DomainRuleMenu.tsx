@@ -5,6 +5,8 @@ import { reject, propEq, move } from 'ramda';
 
 import { translator, updatePath } from '../utils';
 
+import type { FormContract } from "./OptionsPage";
+
 const t = translator('options');
 
 const loopWithin = (currentIndex, size, direction) => {
@@ -18,8 +20,8 @@ interface DomainRuleMenuProps {
   open: boolean,
   anchor: HTMLElement,
   setMenuOpen: (state: boolean) => boolean,
-  form: object,
-  setForm: (form: object) => object,
+  form: FormContract,
+  setForm: (form: FormContract) => FormContract,
 }
 
 const DomainRuleMenu = forwardRef(function DomainRuleMenuInner({open, anchor, setMenuOpen, form, setForm}: DomainRuleMenuProps, ref) {

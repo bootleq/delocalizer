@@ -13,6 +13,14 @@ import DomainRules from './DomainRules';
 
 const t = translator('options');
 
+export interface FormContract {
+  targetReferrers: {[index: number]: string},
+  targetReferrersAny: 'yes' | 'no',
+  domainRules: DomainRule[],
+  preferredLang: string,
+  showBadge: 'yes' | 'no',
+}
+
 const prepopulate = (config) => { // Convert config -> form
   const {...form} = config;
 
@@ -35,15 +43,13 @@ const prepopulate = (config) => { // Convert config -> form
   return form;
 };
 
-const serialize = (form) => { // Convert form -> config
+const serialize = (form: FormContract) => { // Convert form -> config
   const {...config} = form;
 
-  ['targetReferrers'].forEach(k => {
-    config[k] = Object.entries(config[k])
-                  .filter(a => a[1].trim() !== '')
-                  .sort(a => Number(a[0]))
-                  .map(a => a[1].trim());
-  });
+  config['targetReferrers'] = Object.entries(config['targetReferrers'])
+                                  .filter(a => a[1].trim() !== '')
+                                  .sort(a => Number(a[0]))
+                                  .map(a => a[1].trim());
 
   config['domainRules'] = config['domainRules']
                             .map(dissoc('key'))
@@ -53,30 +59,23 @@ const serialize = (form) => { // Convert form -> config
 };
 
 // Extra validation for Hosts, basic ones were simply checked by browser
-const validate = ($form) => {
+const validate = ($form: HTMLFormElement) => {
   let valid = true;
 
   const $rules = Array.from<HTMLTableRowElement>($form.querySelectorAll('#domain-rules tbody > tr'));
   $rules.forEach(tr => {
     const $inputs = ['position', 'fromLocale', 'toLocale'].reduce((acc, k) => ({...acc, [k]: tr.querySelector(`[name$='.${k}']`)}), {});
-    $inputs.toLocale.setCustomValidity('');
 
-    if ($inputs.position.value === '/path' && $inputs.fromLocale.value === '*' && $inputs.toLocale.value === '') {
+    $inputs['toLocale'].setCustomValidity('');
+
+    if ($inputs['position'].value === '/path' && $inputs['fromLocale'].value === '*' && $inputs['toLocale'].value === '') {
       valid = false;
-      $inputs.toLocale.setCustomValidity(t('error_pathWildMatch'));
+      $inputs['toLocale'].setCustomValidity(t('error_pathWildMatch'));
     }
   });
 
   return valid;
 };
-
-interface FormContract {
-  targetReferrers: {[index: number]: string},
-  targetReferrersAny: 'yes' | 'no',
-  domainRules: {[index: number]: DomainRule},
-  preferredLang: string,
-  showBadge: 'yes' | 'no',
-}
 
 const Form = () => {
   const [form, setForm] = useState({} as FormContract);

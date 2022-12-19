@@ -7,6 +7,8 @@ import RulesHint from './RulesHint';
 import DomainRule from '../DomainRule';
 import Menu from './DomainRuleMenu';
 
+import type { FormContract } from "./OptionsPage";
+
 const t = translator('options');
 
 const rulePositionOptions = [
@@ -123,8 +125,8 @@ const Rules = (props: RulesProps) => {
 
 
 interface DomainRulesProps {
-  form: object,
-  setForm: (form: object) => object,
+  form: FormContract,
+  setForm: (form: FormContract) => FormContract,
   busy: boolean,
 }
 
