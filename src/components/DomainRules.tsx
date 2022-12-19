@@ -18,7 +18,7 @@ const rulePositionOptions = [
 
 interface RulePositionOptionsProps {
   rule: DomainRule,
-  ruleKey: string,
+  ruleKey: number,
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
 }
 
@@ -79,11 +79,9 @@ const Rule = memo(function RuleInner(props: RuleProps) {
 });
 
 interface RulesProps {
-  setForm: (form: object) => object,
+  setForm: (form: FormContract) => FormContract,
   disabled: boolean,
-  items: Array<{
-    key: number,
-  }>,
+  items: DomainRule[],
   menuOpen: boolean,
   setMenuOpen: (state: boolean) => boolean,
   setMenuAnchor: (el: HTMLElement) => HTMLElement,
@@ -148,8 +146,8 @@ const DomainRules = (props: DomainRulesProps) => {
 
   useEffect(() => {
     if (form.domainRules) {
-      const keys = form.domainRules.map(prop('key'));
-      maxKey.current = keys.length ? Math.max(...keys.map(k => Number.parseInt(k, 10))) : 0;
+      const keys = form.domainRules.map(prop('key')).map(Number);
+      maxKey.current = keys.length ? Math.max(...keys) : 0;
     }
   }, [form.domainRules]);
 

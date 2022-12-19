@@ -6,7 +6,14 @@ const generalLocalePattern = new RegExp([
 ].map(r => r.source).join(''));
 
 class DomainRule {
-  constructor(config) {
+  fromLocale: string;
+  position: string;
+  domain: string;
+  toLocale: string;
+  enabled: 'yes' | 'no';
+  key?: number;
+
+  constructor(config?) {
     this.fromLocale = config?.fromLocale ?? '*';    // zh, zh-TW, .etc. "*" for any locales
     this.position   = config?.position   ?? 'sub.'; // "sub." | "/path"
     this.domain     = config?.domain     ?? '';
