@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect, useRef, forwardRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useFloating } from '@floating-ui/react-dom';
-import { dissocPath, over, lensProp, reject, propEq, move } from 'ramda';
+import { reject, propEq, move } from 'ramda';
 
 import { translator, updatePath } from '../utils';
 
@@ -14,7 +14,15 @@ const loopWithin = (currentIndex, size, direction) => {
   return next;
 };
 
-const DomainRuleMenu = forwardRef(({open, anchor, setMenuOpen, form, setForm}, ref) => {
+interface DomainRuleMenuProps {
+  open: boolean,
+  anchor: HTMLElement,
+  setMenuOpen: (state: boolean) => boolean,
+  form: object,
+  setForm: (form: object) => object,
+}
+
+const DomainRuleMenu = forwardRef(function DomainRuleMenuInner({open, anchor, setMenuOpen, form, setForm}: DomainRuleMenuProps, ref) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsCountRef = useRef(0);
 
@@ -45,7 +53,7 @@ const DomainRuleMenu = forwardRef(({open, anchor, setMenuOpen, form, setForm}, r
     }
   }, [ref.current]);
 
-  function onDelete(e) {
+  function onDelete() {
     const key = Number.parseInt(anchor.dataset.key, 10);
     setForm(updatePath(
       ['domainRules'],

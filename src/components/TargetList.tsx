@@ -10,8 +10,20 @@ const nextKey = (keys, maxSeenRef) => {
   return maxSeenRef.current;
 };
 
-const OptionList = forwardRef((props, ref) => {
-  const { name, onChange, onDelete, onAdded, disabled, adding } = props;
+interface OptionListProps {
+  name: string
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  onDelete: (e: React.MouseEvent<HTMLElement>) => void,
+  onAdded: () => void,
+  disabled: boolean,
+  adding: boolean,
+  items: {
+    [index: number]: string,
+  },
+}
+
+const OptionList = forwardRef(function OptionListInner(props: OptionListProps, ref) {
+  const { name, onChange, onDelete, onAdded, disabled, adding, items } = props;
 
   useEffect(() => {
     if (adding) {
@@ -20,7 +32,7 @@ const OptionList = forwardRef((props, ref) => {
     }
   }, [adding]);
 
-  const list = Object.entries(props.items).map(([k, v]) => (
+  const list = Object.entries(items).map(([k, v]) => (
     <li key={k} data-key={k}>
       <input type='text' name={name} value={v} onChange={onChange} disabled={disabled} required />
       <input type='button' value={t('_delete')} onClick={onDelete} disabled={disabled} />
@@ -34,18 +46,31 @@ const OptionList = forwardRef((props, ref) => {
   );
 });
 
-const TargetList = props => {
+type TargetListProps = {
+  slots: {
+    legend: string,
+    labelAnyHTML?: string,
+    labelAny?: string,
+    hint: {__html: string},
+  },
+  configName: string,
+  form: object,
+  setForm: (form: object) => object,
+  busy: boolean,
+};
+
+const TargetList = (props: TargetListProps) => {
   const { slots, configName, form, setForm, busy } = props;
   const [adding, setAdding] = useState(null);
   const loaded = !isBlank(form);
 
-  const listRef = useRef();
+  const listRef = useRef<HTMLUListElement>(null);
   const maxSeenKey = useRef(0);
 
   const configNameAny = `${configName}Any`;
 
   function validateItems() {
-    const inputs = Array.from(listRef.current.querySelectorAll('input[type="text"]'));
+    const inputs = Array.from<HTMLInputElement>(listRef.current.querySelectorAll('input[type="text"]'));
 
     if (inputs.length === 1 && inputs[0].value.trim() === '') {
       return true;
@@ -142,7 +167,7 @@ const TargetList = props => {
       />
 
       <div className='hint-and-add'>
-        <small className='hint' dangerouslySetInnerHTML={props.slots.hint} />
+        <small className='hint' dangerouslySetInnerHTML={slots.hint} />
         <input className='add' type='button' value={t('_addNew')}
                onClick={buildOnOptionListAdd(configName)}
                disabled={form[configNameAny] !== 'no'}  />

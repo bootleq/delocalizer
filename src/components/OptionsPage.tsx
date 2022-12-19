@@ -41,7 +41,7 @@ const serialize = (form) => { // Convert form -> config
   ['targetReferrers'].forEach(k => {
     config[k] = Object.entries(config[k])
                   .filter(a => a[1].trim() !== '')
-                  .sort(a => a[0])
+                  .sort(a => Number(a[0]))
                   .map(a => a[1].trim());
   });
 
@@ -56,7 +56,7 @@ const serialize = (form) => { // Convert form -> config
 const validate = ($form) => {
   let valid = true;
 
-  const $rules = Array.from($form.querySelectorAll('#domain-rules tbody > tr'));
+  const $rules = Array.from<HTMLTableRowElement>($form.querySelectorAll('#domain-rules tbody > tr'));
   $rules.forEach(tr => {
     const $inputs = ['position', 'fromLocale', 'toLocale'].reduce((acc, k) => ({...acc, [k]: tr.querySelector(`[name$='.${k}']`)}), {});
     $inputs.toLocale.setCustomValidity('');
@@ -70,9 +70,16 @@ const validate = ($form) => {
   return valid;
 };
 
+interface FormContract {
+  targetReferrers: {[index: number]: string},
+  targetReferrersAny: 'yes' | 'no',
+  domainRules: {[index: number]: DomainRule},
+  preferredLang: string,
+  showBadge: 'yes' | 'no',
+}
 
 const Form = () => {
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState({} as FormContract);
   const [msg, setMsg] = useState({});
   const [busy, setBusy] = useState(true);
 
