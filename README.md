@@ -38,6 +38,7 @@ Make temporary build to `build` folder:
 Lint
 
     yarn lint
+    yarn lint:ts
 
 Unit tests
 
