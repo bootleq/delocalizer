@@ -7,14 +7,11 @@ Read the untranslated document by sending mutated Accept-Language header.
 
 Customizable.
 
+Install
+-------
 
-- Firefox Add-ons
-
-  https://addons.mozilla.org/firefox/addon/delocalizer/
-
-- Chrome Web Store
-
-  https://chrome.google.com/webstore/detail/delocalizer/gjicjdbhbbjjogfedagcnaljepogjioc
+- Firefox Add-ons - [addons.mozilla.org/firefox/addon/delocalizer](https://addons.mozilla.org/firefox/addon/delocalizer/)
+- Chrome Web Store - [chrome.google.com/webstore/detail/delocalizer](https://chrome.google.com/webstore/detail/delocalizer/gjicjdbhbbjjogfedagcnaljepogjioc)
 
 
 Example cases
